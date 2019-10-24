@@ -1,0 +1,44 @@
+.pricing-table.featured-boxes .featured-new__price-helper {
+	    position: relative;
+	}
+	.pricing-table.featured-boxes .featured-new .featured-box .price {
+	    float: none;
+	    margin: 0 0 22px;
+	    font-size: inherit;
+	}
+
+	.price__from {
+	    margin-bottom: -6px;
+	    font-size: .5em;
+	    font-weight: 700;
+	}
+	.price__value--dollars {
+	    font-size: 1.9em;
+	    position: relative;
+	    display: inline-block;
+	    line-height: .8em;
+	    vertical-align: top;
+	    font-weight: 400;
+	}
+
+	.price__group {
+	    vertical-align: top;
+	    display: inline-block;
+	    margin-left: -1px;
+	}
+
+	.price__value--cents {
+	    margin-top: -3px;
+	    display: inline-block;
+	    vertical-align: top;
+	    font-size: 1em;
+	}
+
+	.price__period {
+	    font-size: .2em;
+	    margin-right: 0;
+	    margin-left: 5px;
+	    margin-top: -4px;
+	    line-height: 1em;
+	    max-width: 50px;
+	}
