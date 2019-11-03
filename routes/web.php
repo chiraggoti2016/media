@@ -12,7 +12,16 @@
 */
 
 Route::group(['namespace' => 'Frontend'], function(){
-	Route::get('/', 'HomeController@index');
+	Route::group(['middleware' => 'locale'], function(){
+		Route::get('/', 'HomeController@index');
+	});
+		
+	Route::get('locale/{locale?}',
+    [
+        'as' => 'locale.setlocale',
+        'uses' => 'LocaleController@setLocale'
+    ]);
+
 });
 
 

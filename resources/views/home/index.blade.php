@@ -38,23 +38,25 @@
       <div class="container">
 
         <div class="section-header">
-          <h2>Plans</h2>
+          <h2>Plan's</h2>
           <!-- <p>Velit consequatur consequatur inventore iste fugit unde omnis eum aut.</p> -->
         </div>
 
         <div class="row">
+          @foreach($plans as $plan)
+          	@php(list($whole, $decimal) = explode('.', (float)$plan->price))
           <div class="col-lg-3">
             <div class="card mb-5 mb-lg-0">
               <div class="card-body">
-                <h5 class="card-title text-muted text-uppercase text-center">Internet</h5>
+                <h5 class="card-title text-muted text-uppercase text-center">{{$plan->name}}</h5>
                 <h6 class="card-price text-center">
                 	<div class="featured-new__price-helper">
                         <div class="price price--format_english">
 							<div class="price__from">From</div>
-							<span class="price__value--dollars">24</span>
+							<span class="price__value--dollars">{{ $whole }}</span>
 							<span class="price__group">
-								<span class="price__value--cents">.95</span>
-								<div class="price__period">/Month</div>
+								<span class="price__value--cents">.{{ $decimal }}</span>
+								<div class="price__period">{{$plan->time_period}}</div>
 							</span>
 						</div>
 	                </div>
@@ -72,93 +74,7 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-3">
-            <div class="card mb-5 mb-lg-0">
-              <div class="card-body">
-                <h5 class="card-title text-muted text-uppercase text-center">Tv</h5>
-                <h6 class="card-price text-center">
-                	<div class="featured-new__price-helper">
-                        <div class="price price--format_english">
-							<div class="price__from">From</div>
-							<span class="price__value--dollars">24</span>
-							<span class="price__group">
-								<span class="price__value--cents">.95</span>
-								<div class="price__period">/Month</div>
-							</span>
-						</div>
-	                </div>
-                </h6>
-                <hr>
-                <ul class="fa-ul">
-                  <li><span class="fa-li"><i class="fa fa-check"></i></span>DSL or Cable</li>
-                  <li><span class="fa-li"><i class="fa fa-check"></i></span>Unlimited usage</li>
-                  <li><span class="fa-li"><i class="fa fa-check"></i></span>Up to 300 Mbps</li>
-                </ul>
-                <hr>
-                <div class="text-center">
-                  <button type="button" class="btn" data-toggle="modal" data-target="#buy-ticket-modal" data-ticket-type="standard-access">See Plans</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3">
-            <div class="card mb-5 mb-lg-0">
-              <div class="card-body">
-                <h5 class="card-title text-muted text-uppercase text-center">Home Phone</h5>
-                <h6 class="card-price text-center">
-                	<div class="featured-new__price-helper">
-                        <div class="price price--format_english">
-							<div class="price__from">From</div>
-							<span class="price__value--dollars">24</span>
-							<span class="price__group">
-								<span class="price__value--cents">.95</span>
-								<div class="price__period">/Month</div>
-							</span>
-						</div>
-	                </div>
-                </h6>
-                <hr>
-                <ul class="fa-ul">
-                  <li><span class="fa-li"><i class="fa fa-check"></i></span>DSL or Cable</li>
-                  <li><span class="fa-li"><i class="fa fa-check"></i></span>Unlimited usage</li>
-                  <li><span class="fa-li"><i class="fa fa-check"></i></span>Up to 300 Mbps</li>
-                </ul>
-                <hr>
-                <div class="text-center">
-                  <button type="button" class="btn" data-toggle="modal" data-target="#buy-ticket-modal" data-ticket-type="standard-access">See Plans</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3">
-            <div class="card mb-5 mb-lg-0">
-              <div class="card-body">
-                <h5 class="card-title text-muted text-uppercase text-center">Home Security</h5>
-                <h6 class="card-price text-center">
-                	<div class="featured-new__price-helper">
-                        <div class="price price--format_english">
-							<div class="price__from">From</div>
-							<span class="price__value--dollars">12</span>
-							<span class="price__group">
-								<span class="price__value--cents">.95</span>
-								<div class="price__period">/Month</div>
-							</span>
-						</div>
-	                </div>
-                </h6>
-                <hr>
-                <ul class="fa-ul">
-                  <li><span class="fa-li"><i class="fa fa-check"></i></span>DSL or Cable</li>
-                  <li><span class="fa-li"><i class="fa fa-check"></i></span>Unlimited usage</li>
-                  <li><span class="fa-li"><i class="fa fa-check"></i></span>Up to 300 Mbps</li>
-                </ul>
-                <hr>
-                <div class="text-center">
-                  <button type="button" class="btn" data-toggle="modal" data-target="#buy-ticket-modal" data-ticket-type="standard-access">See Plans</button>
-                </div>
-              </div>
-            </div>
-          </div>
+          @endforeach
         </div>
 
       </div>
