@@ -77,8 +77,12 @@
                 @endif
                 <hr>
                 <div class="text-center">
-                  <!--<button type="button" class="btn">Order</button>-->
-                  <a href="{{route('cart.index')}}" class="btn" >Order</a>
+                  <form action="{{route('cart.index')}}" method="POST">
+                    @csrf
+                    <input type="hidden" name="plan_id" value="{{$plan->id}}" />
+                    <input type="hidden" name="plan_type" value="{{$plan->type}}" />
+                    <button type="submit" class="btn">Order</button>
+                  </form>
                 </div>
               </div>
             </div>
