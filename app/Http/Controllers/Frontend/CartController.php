@@ -41,7 +41,9 @@ class CartController extends Controller
 
         $availability = count($available_addresses) ? 1 : 0;
 
-        return response()->json(['selected_address' => $check_address, 'checkedable' => array_keys($checkavailability),'availability' => $availability]);
+        $checkedable = $availability ? array_keys($checkavailability) : [];
+
+        return response()->json(['selected_address' => $check_address, 'checkedable' => $checkedable,'availability' => $availability]);
     
         
     }
