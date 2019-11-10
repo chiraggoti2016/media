@@ -13,8 +13,8 @@
       <nav id="nav-menu-container">
         <ul class="nav-menu">
           <!-- <li class="menu-active"><a href="#intro">Internet</a></li> -->
-          @foreach($plan_types as $plantype) 
-            <li><a href="#{{strtolower($plantype)}}">{{ ucwords($plantype) }}</a></li>
+          @foreach(config('plantypes.list') as $plantype) 
+            <li><a href="{{ route('plan', $plantype) }}">{{ ucwords(str_replace('_',' ',$plantype)) }}</a></li>
           @endforeach
           <li><a href="#whyus">Why Us</a></li>
           <li><a href="#support">Support</a></li>

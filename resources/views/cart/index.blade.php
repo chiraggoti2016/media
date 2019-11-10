@@ -1,17 +1,46 @@
 @extends('app')
 
-@section('title','Home')
+@section('title','Cart')
+
+@push('css')
+    <link rel="stylesheet" href="/assets/plugins/jQuery-autoComplete/jquery.auto-complete.css">
+@endpush
 
 @section('poster')
 <!--==========================
     Intro Section
   ============================-->
-  <section id="intro" class="home-cover">
+  <section id="intro" class="cart-cover" style="height: 12vh;">
     <div class="intro-container wow fadeIn">
-      <h1 class="mb-4 pb-0">We Love Our Customers, <br><span>Our Customer Love</span> Back</h1>
-      <a href="#about" class="about-btn scrollto">Shop Online</a>
+      <!--<h1 class="mb-4 pb-0">Unbeatable Internet, TV, <br/>Home Phone & Home Security</h1>-->
+      <!--<a href="#about" class="about-btn scrollto">Shop Online</a>-->
     </div>
   </section>
+  
+      <!--==========================
+      Subscribe Section
+    ============================-->
+    <section id="subscribe" >
+      <div class="container wow fadeInUp">
+        <div class="section-header">
+          <h2>Unbeatable Internet, TV, Home Phone & Home Security</h2>
+          <p>Find what works best for you</p>
+        </div>
+
+        <form method="POST" action="#">
+          <div class="form-row justify-content-center">
+            <div class="col-auto">
+              <input type="text" class="form-control" placeholder="Example: 1003-12 Timor St., Toronto, ON">
+            </div>
+            <div class="col-auto">
+              <button type="submit">Check</button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </section>
+
 @stop
 
 @section('content')
@@ -30,61 +59,6 @@
         </div>
       </div>
     </section>
-
-    <!--==========================
-      Shop Online Section
-    ============================-->
-    <section id="buy-tickets" class="section-with-bg wow fadeInUp">
-      <div class="container">
-
-        <div class="section-header">
-          <h2>Plan's</h2>
-          <!-- <p>Velit consequatur consequatur inventore iste fugit unde omnis eum aut.</p> -->
-        </div>
-
-        <div class="row">
-          @php $options = config('plantypes.options') @endphp
-          @foreach($plans as $plan)
-          	@php(list($whole, $decimal) = explode('.', (float)$plan->price))
-          <div class="col-lg-3">
-            <div class="card mb-5 mb-lg-0">
-              <div class="card-body">
-                <h5 class="card-title text-muted text-uppercase text-center">{{str_replace('_',' ',$plan->type)}}</h5>
-                <h6 class="card-price text-center">
-                	<div class="featured-new__price-helper">
-                        <div class="price price--format_english">
-							<div class="price__from">From</div>
-							<span class="price__value--dollars">{{ $whole }}</span>
-							<span class="price__group">
-								<span class="price__value--cents">.{{ $decimal }}</span>
-								<div class="price__period">/Month</div>
-							</span>
-						</div>
-	                </div>
-                </h6>
-                @if(isset($options[$plan->type]))
-                <hr>
-                <ul class="fa-ul">
-                  @foreach($options[$plan->type] as $option)
-                    <li><span class="fa-li"><i class="fa fa-check"></i></span>{{$option}}</li>
-                  @endforeach
-                </ul>
-                <hr>
-                @endif
-                
-                <div class="text-center">
-                	<a href="{{ route('plan', $plan->type) }}" class="btn">See Plans</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          @endforeach
-        </div>
-
-      </div>
-
-    </section>
-
 
     <!--==========================
       Contact Section
@@ -159,4 +133,5 @@
 @stop
 
 @push('js')
+  <script src="/assets/plugins/jQuery-autoComplete/jquery.auto-complete.js"></script>
 @endpush

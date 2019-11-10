@@ -469,11 +469,24 @@ body.mobile-nav-active #mobile-nav-toggle {
 #intro {
   width: 100%;
   height: 100vh;
-  background: url(../img/intro-bg.jpg) top center;
+  /*background: url(../img/intro-bg.jpg) top center;*/
   background-size: cover;
   overflow: hidden;
   position: relative;
 }
+
+#intro.home-cover {
+  background: url(../img/intro-bg.jpg) top center;
+}
+
+#intro.internet-cover {
+  background: url(../img/internet.jpg) top center;
+}
+
+#intro.cart-cover {
+  background: url(../img/cart-cover.jpg) top center;
+}
+
 
 #intro:before {
   content: "";

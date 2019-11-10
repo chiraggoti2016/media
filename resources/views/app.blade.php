@@ -46,7 +46,7 @@
 
   <main>@yield('content')</main>
 
-
+  @include('partials.states')
   @include('partials.footer')
 
   <!-- JavaScript Libraries -->

@@ -11,9 +11,26 @@
 |
 */
 
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
+
 Route::group(['namespace' => 'Frontend'], function(){
 	Route::group(['middleware' => 'locale'], function(){
+		// HomeController
 		Route::get('/', 'HomeController@index');
+		Route::post('/set-state', 'HomeController@setState')->name('set-state');
+
+		// CartController
+	    Route::group(['prefix' => 'cart'], function(){
+    		Route::get('/', 'CartController@index')->name('cart.index');
+    	});
+        
+        
+		Route::get('/{type}', 'HomeController@plan')->name('plan');
+		
+
 	});
 		
 	Route::get('locale/{locale?}',
@@ -21,10 +38,9 @@ Route::group(['namespace' => 'Frontend'], function(){
         'as' => 'locale.setlocale',
         'uses' => 'LocaleController@setLocale'
     ]);
-
+    // Route::get('/', function(){
+    //     return redirect('/admin');
+    // });
 });
 
 
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
