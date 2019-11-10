@@ -133,5 +133,7 @@
 @stop
 
 @push('js')
+  
   <script src="/assets/plugins/jQuery-autoComplete/jquery.auto-complete.js"></script>
+
 @endpush
