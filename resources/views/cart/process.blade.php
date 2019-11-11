@@ -19,6 +19,17 @@
 
 @section('content')
 <main id="main">
+
+  <section>
+    <div class="container">
+        <ul class="progressbar">
+            <li class="active">Internet</li>
+            <li>Installation</li>
+            <li>Summary</li>
+            <li>Payment</li>
+    </ul>
+  </section>
+
   @include('cart.step.' . $plan->type, ['plan' => $plan])
 </main>
 @stop

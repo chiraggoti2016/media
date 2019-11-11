@@ -3,9 +3,9 @@
     ============================-->
     <section id="speakers" class="about-all-plans wow">
       <div class="container">
-        <div class="section-header">
+        <div class="row">
           <h5>
-            <svg class="checkout-start-services__item-icon" width="100px" height="100px" viewBox="0 0 367 255" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <svg class="checkout-start-services__item-icon" width="50px" height="50px" viewBox="0 0 367 255" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                     <g id="internet_icon_blue" fill="#f82249">
                                         <g id="Layer_1">
@@ -28,7 +28,7 @@
           </div>
           <div class="col-lg-3 text-right">
             <h3>
-              <div class="checkout-service-section__ico-success">
+              <div class="checkout-success">
                         <i class="fa fa-check"></i>
                     </div>
                 <!-- <a href="#">Change</a> -->

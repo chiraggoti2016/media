@@ -36,6 +36,13 @@ class AppServiceProvider extends ServiceProvider
             $states = State::all()->pluck('name', 'id');
             $view->with('states', $states)->with('has_selected_state', $has_selected_state);
         });
+
+        view()->composer('layouts.checkout.footer', function ($view) {
+            
+            $cart = Session::has('cart') ? Session::get('cart') : [];
+
+            $view->with('cart', $cart);
+        });
     }
 
     /**
