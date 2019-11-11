@@ -27,6 +27,7 @@ Route::group(['namespace' => 'Frontend'], function(){
     		Route::any('/', 'CartController@index')->name('cart.index');
     		Route::get('/sugguest/address', 'CartController@sugguestAddressAjax')->name('cart.sugguest.address');
     		Route::post('/check/address/availability', 'CartController@checkAddressAvailability')->name('cart.check.address.availability');
+            Route::post('/process', 'CartController@process')->name('cart.process');
     	});
         
         

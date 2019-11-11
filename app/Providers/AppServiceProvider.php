@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('partials.header', function ($view) {
+        view()->composer(['layouts.master.header', 'layouts.checkout.header'], function ($view) {
 
             $locale_prefix = Session::get('locale_prefix');
 

@@ -153,3 +153,27 @@
 	    bottom: 0px !important;
 	    width: 100% !important;
 	}
+
+	#subscribe button:disabled {
+		background: #597575;
+	    color: black;
+	    cursor: not-allowed;
+	}
+
+	#subscribe button:hover {
+	    background: #e0072f;
+	}
+
+	.checkout-service-section__ico-success {
+	    position: relative;
+	    margin: 0 auto 3px;
+	    width: 39px;
+	    height: 39px;
+	    font-size: 25px;
+	    line-height: 38px;
+	    color: #fff;
+	    text-align: center;
+	    background-color: #70bf00;
+	    -webkit-border-radius: 50%;
+	    border-radius: 50%;
+	}

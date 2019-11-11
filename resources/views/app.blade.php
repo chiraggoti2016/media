@@ -40,14 +40,15 @@
 
 <body>
 
-  @include('partials.header')
+  @yield('header')
 
   @yield('poster')
 
   <main>@yield('content')</main>
 
   @include('partials.states')
-  @include('partials.footer')
+
+  @yield('footer')
 
   <!-- JavaScript Libraries -->
   <script src="/assets/lib/jquery/jquery.min.js"></script>
