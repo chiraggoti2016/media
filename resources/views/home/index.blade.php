@@ -49,24 +49,29 @@
           <div class="col-lg-3">
             <div class="card mb-5 mb-lg-0">
               <div class="card-body">
+                
+                <p class="text-center">@if (view()->exists('svg.' . strtolower(str_replace('_','-',$plan->type)))) 
+                  @include('svg.' . strtolower(str_replace('_','-',$plan->type)))
+                @endif</p>
+
                 <h5 class="card-title text-muted text-uppercase text-center">{{str_replace('_',' ',$plan->type)}}</h5>
                 <h6 class="card-price text-center">
                 	<div class="featured-new__price-helper">
                         <div class="price price--format_english">
-							<div class="price__from">From</div>
-							<span class="price__value--dollars">{{ $whole }}</span>
-							<span class="price__group">
-								<span class="price__value--cents">.{{ $decimal }}</span>
-								<div class="price__period">/Month</div>
-							</span>
-						</div>
+            							<div class="price__from">From</div>
+            							<span class="price__value--dollars">{{ $whole }}</span>
+            							<span class="price__group">
+            								<span class="price__value--cents">.{{ $decimal }}</span>
+            								<div class="price__period">/Month</div>
+            							</span>
+            						</div>
 	                </div>
                 </h6>
                 @if(isset($options[$plan->type]))
                 <hr>
                 <ul class="fa-ul">
                   @foreach($options[$plan->type] as $option)
-                    <li><span class="fa-li"><i class="fa fa-check"></i></span>{{$option}}</li>
+                    <li style="font-size: 12px;"><span class="fa-li"><i class="fa fa-check"></i></span>{{$option}}</li>
                   @endforeach
                 </ul>
                 <hr>
