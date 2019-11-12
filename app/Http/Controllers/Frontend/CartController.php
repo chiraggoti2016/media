@@ -65,10 +65,26 @@ class CartController extends Controller
             $availableplanId = Session::get('availableplan.'.$step);
             $plan = Plan::find($availableplanId);
 
+            $alternate_plans = Plan::where('type', $step)->get();
+
             Session::put('cart.data.' . $step, $plan);
 
+        } else {
+            return redirect()->back();
         }
 
-        return view('cart.process',compact('plan'));        
+        return view('cart.process',compact('plan', 'alternate_plans'));        
     }
+
+    public function changePlan($step, $id) {
+        $plan = Plan::find($id);
+        
+        if(in_array($step,config('plantypes.list')) && $plan) {            
+            Session::put('availableplan.'.$step, $id);
+        }
+
+        return redirect()->back();
+    }
+
+
 }

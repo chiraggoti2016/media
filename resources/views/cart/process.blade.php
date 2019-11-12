@@ -36,4 +36,23 @@
 
 @push('js')
   <script src="/assets/plugins/jQuery-toast/dist/jquery.toast.min.js"></script>
+  <script type="text/javascript">
+    var plan = "{{$plan->type}}";
+    var next_url = "{{route('cart.process')}}";
+    $('.plan-select').click(function(e){
+      $('.plan-select').each(function(){
+        $(this).removeClass('select').html('Select');
+      });
+      $(this).addClass('select').html('Selected');
+      plan = $(this).data('plan-id');
+      next_url = $(this).data('next-url');
+      $('#next-form').attr('action', next_url);
+    });
+
+    $('#change-plan-link').click(function(){
+      $(this).parent().hide();
+      $('#alternate-container').show();
+      $("#next-btn").attr("disabled", false);
+    });
+  </script>
 @endpush

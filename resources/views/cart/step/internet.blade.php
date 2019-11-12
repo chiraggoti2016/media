@@ -1,7 +1,7 @@
     <!--==========================
       What's included in all our plans
     ============================-->
-    <section id="speakers" class="about-all-plans wow">
+    <section id="speakers" class="about-all-plans wow" style="padding: 60px 0 200px 0;">
       <div class="container">
         <div class="row">
           <p class="svg-75">
@@ -15,9 +15,14 @@
           </div>
           <div class="col-lg-3 text-center">
               <div class="checkout-success"><i class="fa fa-check"></i></div>
-              <a href="#">Change</a>            
+              <a href="#" id="change-plan-link">Change</a>            
           </div>
+        </div>
+        
+        <div class="row" id="alternate-container" style="display: none;">
+          @if (view()->exists('cart.alternate.' . strtolower(str_replace('_','-',$plan->type)))) 
+            @include('cart.alternate.' . strtolower(str_replace('_','-',$plan->type)), ['alternate_plans' => $alternate_plans, 'plan' => $plan])
+          @endif
         </div>
       </div>
     </section>
-

@@ -53,7 +53,7 @@
                   <div class="featured-new__price-helper">
                         <div class="price price--format_english">
                           <div class="price__from">{{$plan->title}}</div>
-                          <span class="price__value--dollars">{{ $whole }}</span>
+                          $<span class="price__value--dollars">{{ $whole }}</span>
                           <span class="price__group">
                             <span class="price__value--cents">.{{ $decimal }}</span>
                             <div class="price__period">monthly</div>
