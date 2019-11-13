@@ -14,10 +14,10 @@
                 @if(isset($options[$_plan->type]))
 	                <hr>
 					<ul class="fa-ul">
-
-	                  @foreach($options[$_plan->type] as $option)
-	                    <li style="font-size: 12px;"><span class="fa-li"><i class="fa fa-check"></i></span>{{$option}}</li>
-	                  @endforeach
+	                  	<li style="font-size: 12px;"><span class="fa-li"><i class="fa fa-check"></i></span>Up to {{$_plan->downspeed}} {{ucwords($_plan->downspeed_type)}} download</li>
+						<li style="font-size: 12px;"><span class="fa-li"><i class="fa fa-check"></i></span>Up to {{$_plan->upspeed}} {{ucwords($_plan->upspeed_type)}} upload</li>
+						<li style="font-size: 12px;"><span class="fa-li"><i class="fa fa-check"></i></span>No usage limits</li>
+						<li style="font-size: 12px;"><span class="fa-li"><i class="fa fa-check"></i></span>No fixed-term contracts</li>
 	                </ul>
                 @endif
                 <hr>

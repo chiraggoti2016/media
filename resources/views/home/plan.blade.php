@@ -45,7 +45,7 @@
         <div class="row">
           @foreach($plans as $plan)
             @php(list($whole, $decimal) = explode('.', (float)$plan->price))
-          <div class="col-lg-3">
+          <div class="col-lg-4">
             <div class="card mb-5 mb-lg-0">
               <div class="card-body">
                 <h5 class="card-title text-muted text-uppercase text-center">{{$plan->tagline}}</h5>
@@ -62,15 +62,15 @@
                   </div>
                 </h6>
                 
-                @if(!empty($plan->detail_desctiption) && $detail_desctiption = json_decode($plan->detail_desctiption))
+                @if(!empty($plan->downspeed) && !empty($plan->upspeed))
                     <hr>
                     @if(strtolower($plan->type) == 'internet')
                     <div class="row">
                       <div class="col-sm-6">
-                        <h6 class="text-muted text-uppercase text-center"><i class="fa fa-chevron-down"></i></span> {{$detail_desctiption->downspeed}}</h6>                  
+                        <h6 class="text-muted text-uppercase text-center"><i class="fa fa-chevron-down"></i></span> {{$plan->downspeed}} {{ucwords($plan->downspeed_type)}}</h6>                  
                       </div>
                       <div class="col-sm-6">
-                        <h6 class="text-muted text-uppercase text-center"><i class="fa fa-chevron-up"></i></span> {{$detail_desctiption->upspeed}}</h6>
+                        <h6 class="text-muted text-uppercase text-center"><i class="fa fa-chevron-up"></i></span> {{$plan->upspeed}} {{ucwords($plan->upspeed_type)}}</h6>
                       </div>
                     </div>
                     @endif
