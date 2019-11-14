@@ -22,22 +22,36 @@
                 @endif
                 <hr>
                 <div class="row">
-			        @php($price = isset($_plan->price) ? $_plan->price : 0)
-			        @php(list($whole, $decimal) = explode('.', (float)$price))
-
-					<div class="col-sm-6 text-left">
-						<h6 class="card-price">
-	                        <div class="featured-new__price-helper">
-	                              <div class="price price--format_english" style="color: #00000;">
-	                                $<span class="price__value--dollars" style="color: #00000;">{{$whole}}</span>
+			        @php $price = splitAmount($_plan->price); @endphp
+					<div class="col-sm-3 text-right pr-2">
+						<h6 class="card-price {{ !empty($_plan->discount)?'old-price':'new-price' }}">
+	                        <div class="featured-new__price-helper card-price-black">
+	                              <div class="price price--format_english {{ !empty($_plan->discount)?'price--old':'' }} ">
+	                                $<span class="price__value--dollars">{{$price['whole']}}</span>
 	                                <span class="price__group">
-	                                  <span class="price__value--cents" style="color: #00000;">.{{$decimal}}</span>
-	                                  <div class="price__period" style="color: #00000;">/Month</div>
+	                                  <span class="price__value--cents">.{{$price['decimal']}}</span>
+	                                  <div class="price__period">/Month</div>
 	                                </span>
 	                              </div>
 	                        </div>
-	                      </h6>
+	                    </h6>
 	                </div>
+	                @if(hasDiscount($_plan))
+	                	@php $price = splitAmount(getDiscountedPrice($_plan)); @endphp
+	                <div class="col-sm-3 text-left pl-2">
+						<h6 class="card-price new-price">
+	                        <div class="featured-new__price-helper card-price-black">
+	                              <div class="price price--format_english">
+	                                $<span class="price__value--dollars">{{$price['whole']}}</span>
+	                                <span class="price__group">
+	                                  <span class="price__value--cents">.{{$price['decimal']}}</span>
+	                                  <div class="price__period">/Month</div>
+	                                </span>
+	                              </div>
+	                        </div>
+	                    </h6>
+	                </div>
+	                @endif
 					<div class="col-sm-6 text-right">
 						@if($plan->id == $_plan->id)
 							<span class="plan-select select" data-plan-id="{{$_plan->id}}" data-next-url="{{route('cart.change.plan',[$_plan->type,$_plan->id])}}">Selected</span>

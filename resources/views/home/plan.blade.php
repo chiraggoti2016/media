@@ -44,7 +44,7 @@
 
         <div class="row">
           @foreach($plans as $plan)
-            @php(list($whole, $decimal) = explode('.', (float)$plan->price))
+            @php $price = splitAmount(getPrice($_plan)); @endphp
           <div class="col-lg-4">
             <div class="card mb-5 mb-lg-0">
               <div class="card-body">
@@ -53,9 +53,9 @@
                   <div class="featured-new__price-helper">
                         <div class="price price--format_english">
                           <div class="price__from">{{$plan->title}}</div>
-                          $<span class="price__value--dollars">{{ $whole }}</span>
+                          $<span class="price__value--dollars">{{ $price['whole'] }}</span>
                           <span class="price__group">
-                            <span class="price__value--cents">.{{ $decimal }}</span>
+                            <span class="price__value--cents">.{{ $price['decimal'] }}</span>
                             <div class="price__period">monthly</div>
                           </span>
                         </div>

@@ -3,8 +3,7 @@
     ============================-->
     <section id="subscribe" class="bottom-cart-container">
       <div class="container wow">
-        @php($price = isset($cart['data']['internet']['price']) ? $cart['data']['internet']['price'] : 0)
-        @php(list($whole, $decimal) = explode('.', (float)$price))
+          @php($total = splitAmount($cart['summary']['total']))
           
           <div class="row">
             <div class="col-lg-9">
@@ -15,9 +14,9 @@
                       <h6 class="card-price text-center">
                         <div class="featured-new__price-helper">
                               <div class="price price--format_english" style="color: white;">
-                                $<span class="price__value--dollars">{{$whole}}</span>
+                                $<span class="price__value--dollars">{{$total['whole']}}</span>
                                 <span class="price__group">
-                                  <span class="price__value--cents">.{{$decimal}}</span>
+                                  <span class="price__value--cents">.{{$total['decimal']}}</span>
                                   <div class="price__period">/Month</div>
                                 </span>
                               </div>
@@ -29,9 +28,16 @@
                 
                   <p class="col">
                     Prorated first payment:
-                    <b>$22.14</b> <br/>
+                    <b>${{$cart['summary']['total']}}</b> <br/>
                     One time charge:
                     <b>$0.00</b>
+
+                  </p>
+
+                  <p class="col footer-cart-link" >
+                    <a href="#" id="see-cart-details">See details</a>
+                    <br/>
+                    <a href="{{route('cart.index')}}">Change address or add other services</a>
 
                   </p>
               
@@ -41,7 +47,7 @@
               <p>Your unlimited plan: {{ $plan->title }}</p> -->
             </div>
             <div class="col-lg-3 text-right">
-                <div class="form-row justify-content-center">
+                <div class="form-row justify-content-center" id="next-form-container">
                   <form id="next-form" method="POST">
                     @csrf
                     <div class="col-auto">
@@ -50,6 +56,55 @@
                   </form>
                 </div>
 
+                <div class="close-button" style="display: none;">
+                    <button type="button" id="close-cart-details">
+                        × <span class="shopping-cart__btn-close-label">Close</span>
+                    </button>
+                </div>
+
+            </div>
+          </div>
+          <div id="cart-details" style="display: none;">
+            <hr/>
+            <div class="col-auto">
+              <h3>Shopping Cart</h3> 
+
+              <div class="row">
+                <div class="col-sm-6">
+                  @foreach($cart['data'] as $plantype => $plan) 
+                    <h4>Internet</h4>
+                    <table>
+                      <tr>
+                        <th>Plan</th>
+                        <th class="text-right">Payment</th>
+                      </tr>
+                      <tr>
+                        <td>{{$plan->title}}</td>                
+                        <td class="text-right">{{$plan->price}}</td>                
+                      </tr>
+                      @if(hasDiscount($plan))
+                      <tr class="discount">
+                        <td>Discount</td>                
+                        <td class="text-right">-{{getDiscount($plan)}}</td>                
+                      </tr>
+                      @endif
+                      <tr class="line">
+                        <td rowspan="2">
+                            Starts {{ date_format(now(),"M d Y") }}, ends {{ date_format(date_add(now(),date_interval_create_from_date_string("1 months")),"M d Y") }} 
+                        </td>
+                      </tr>
+                      <tr>
+                        <th rowspan="2" class="text-right">{{getPrice($plan)}}</th>
+                      </tr>
+                    </table>
+                  @endforeach
+      
+                </div>
+              </div>
+            </div>
+            <hr/>
+            <div class="col-auto text-right">
+              <h3>Total: <i>${{$cart['summary']['total']}}</i></h3> 
             </div>
           </div>
 
@@ -58,3 +113,23 @@
       </div>
 
     </section>
+
+@push('js')
+
+  <script type="text/javascript">
+
+    $('#see-cart-details').click(function(e){
+      $(this).hide();
+      $('#next-form-container').hide();
+      $('#close-cart-details').parent().show();
+      $('#cart-details').show();
+    });
+
+    $('#close-cart-details').click(function(){
+      $('#cart-details').hide();
+      $(this).parent().hide();
+      $('#see-cart-details').show();
+      $('#next-form-container').show();
+    });
+  </script>
+    @endpush

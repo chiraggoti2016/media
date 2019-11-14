@@ -40,7 +40,13 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('layouts.checkout.footer', function ($view) {
             
             $cart = Session::has('cart') ? Session::get('cart') : [];
-
+            $total = $discount = 0;
+            foreach($cart['data'] as $plantype => $plan) {
+                $total += getPrice($plan);
+                $discount += getDiscount($plan);
+            };
+            $cart['summary']['total'] = $total;
+            $cart['summary']['discount'] = $discount;
             $view->with('cart', $cart);
         });
     }

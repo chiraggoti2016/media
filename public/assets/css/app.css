@@ -1,4 +1,16 @@
-.pricing-table.featured-boxes .featured-new__price-helper {
+	.new-price {
+		color: #000;
+	}
+
+	.new-price-white {
+		color: white;
+	}
+
+	.old-price {
+		color: #ccc;
+	}
+
+	.pricing-table.featured-boxes .featured-new__price-helper {
 	    position: relative;
 	}
 	.pricing-table.featured-boxes .featured-new .featured-box .price {
@@ -11,6 +23,7 @@
 	    margin-bottom: -6px;
 	    font-size: .5em;
 	    font-weight: 700;
+	    color:inherit;
 	}
 	.price__value--dollars {
 	    font-size: 1.9em;
@@ -19,12 +32,14 @@
 	    line-height: .8em;
 	    vertical-align: top;
 	    font-weight: 400;
+	    color:inherit;
 	}
 
 	.price__group {
 	    vertical-align: top;
 	    display: inline-block;
 	    margin-left: -1px;
+	    color:inherit;
 	}
 
 	.price__value--cents {
@@ -32,6 +47,7 @@
 	    display: inline-block;
 	    vertical-align: top;
 	    font-size: 1em;
+	    color:inherit;
 	}
 
 	.price__period {
@@ -41,6 +57,20 @@
 	    margin-top: -4px;
 	    line-height: 1em;
 	    max-width: 50px;
+	    color:inherit;
+	}
+
+	.price--old::before {
+	    content: "";
+	    height: 2px;
+	    position: absolute;
+	    -webkit-transform: rotate(-30deg);
+	    -ms-transform: rotate(-30deg);
+	    transform: rotate(-15deg);
+	    background-color: #cccccc9e;
+	    width: 100%;
+	    top: 25%;
+	    left: 7%;
 	}
 
 	/*CheckBox */
@@ -305,3 +335,42 @@
 		background-color: #f82249;
 	}
 
+
+	.footer-cart-link a{
+
+	    color: #ffffff;
+	    transition: 0.5s;
+	    text-decoration: underline;
+	    font-size: small;
+	}
+
+	.bottom-cart-container hr {border-top-color: white;}
+	.bottom-cart-container h2, .bottom-cart-container h3, .bottom-cart-container h4, .bottom-cart-container table tr th, .bottom-cart-container table tr td{color:#ffffff;}
+	.bottom-cart-container table{width: 100%;}
+	.bottom-cart-container table tbody{border-top: 1px dotted #fff;}
+	.bottom-cart-container table tr th{width: 75%;}
+	.bottom-cart-container table tr td{font-weight: 100px;}
+	.bottom-cart-container table tr.discount td{font-size: small;}
+	.bottom-cart-container table tr.line td{font-size: smaller;}
+	
+
+	.bottom-cart-container .close-button button {
+	    text-decoration: none;
+	    font-style: normal;
+	    cursor: pointer;
+	    background: 0 0;
+	    border: 0;
+	    -webkit-appearance: none;
+	    display: block;
+	    outline: 0;
+	    padding: 0;
+	    z-index: 1046;
+	    -webkit-box-shadow: none;
+	    box-shadow: none;
+	    font-family: "Open Sans",Arial,sans-serif;
+	    font-weight: 300;
+	    font-size: 28px;
+	    color: #fff;
+	    overflow: visible;
+	    margin-top: -6px;
+	}
