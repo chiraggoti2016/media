@@ -44,7 +44,7 @@
 
         <div class="row">
           @foreach($plans as $plan)
-            @php $price = splitAmount(getPrice($_plan)); @endphp
+            @php $price = splitAmount(getPrice($plan)); @endphp
           <div class="col-lg-4">
             <div class="card mb-5 mb-lg-0">
               <div class="card-body">
