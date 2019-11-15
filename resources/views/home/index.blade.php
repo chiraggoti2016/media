@@ -45,7 +45,7 @@
         <div class="row">
           @php $options = config('plantypes.options') @endphp
           @foreach($plans as $plan)
-            @php $price = splitAmount(getPrice($_plan)); @endphp
+            @php $price = splitAmount(getPrice($plan)); @endphp
           <div class="col-lg-3">
             <div class="card mb-5 mb-lg-0">
               <div class="card-body">
