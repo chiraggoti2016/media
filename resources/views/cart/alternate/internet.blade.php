@@ -23,7 +23,7 @@
                 <hr>
                 <div class="row">
 			        @php $price = splitAmount($_plan->price); @endphp
-					<div class="col-sm-3 text-right pr-2">
+					<div class="{{hasDiscount($_plan)?'col-sm-3':'col-sm-6'}} text-right pr-2">
 						<h6 class="card-price {{ !empty($_plan->discount)?'old-price':'new-price' }}">
 	                        <div class="featured-new__price-helper card-price-black">
 	                              <div class="price price--format_english {{ !empty($_plan->discount)?'price--old':'' }} ">
