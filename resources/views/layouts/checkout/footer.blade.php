@@ -43,15 +43,15 @@
               
               </div>
 
-             <!--  <h3>Internet Plans</h3>
-              <p>Your unlimited plan: {{ $plan->title }}</p> -->
             </div>
             <div class="col-lg-3 text-right">
-                <div class="form-row justify-content-center" id="next-form-container">
-                  <form id="next-form" method="POST">
+                <div class="form-row justify-content-center" id="next-form-container" >
+                  <form id="next-form" method="POST" action="{{($process_done)?route('cart.process.done'):''}}">
                     @csrf
+                    <div class="next-form-input-container"></div>
                     <div class="col-auto">
-                      <button type="submit" id="next-btn" class="next-btn" disabled="disabled">Next</button>
+                      <button type="submit" id="next-btn" class="next-btn" {{(!$process_done)?'disabled="disabled"':''}}>Next</button>
+                      }
                     </div>
                   </form>
                 </div>
@@ -97,8 +97,50 @@
                         <th rowspan="2" class="text-right">{{getPrice($plan)}}</th>
                       </tr>
                     </table>
+
+                    <table>
+                      <tr>
+                        <th colspan="2">Equipment</th>
+                      </tr>
+
+                      @if(isset($cart['addon'][$plantype]['modem']))
+                          @foreach($cart['addon'][$plantype]['modem'] as $modem_id => $modem)
+                            @if(in_array($modem['buying_method'], ['none', 'purchase']))
+                              <tr>
+                                <td>{{$modem['addon']->name}}</td>                
+                                <td class="text-right">{{$modem['addon']->amount}}</td>
+                              </tr>
+                            @else
+                              <tr>
+                                <td>{{$modem['addon']->name}} (Rent)</td>                
+                                <td class="text-right">{{$modem['addon']->rent_amount}}</td>
+                              </tr>
+                              <tr>
+                                <td>{{$modem['addon']->name}} (Deposite)</td>                
+                                <td class="text-right">{{$modem['addon']->deposit}}</td>
+                              </tr>
+                            @endif
+                          @endforeach 
+                      @endif
+
+                      @if(isset($cart['addon'][$plantype]['other']))
+                          @foreach($cart['addon'][$plantype]['other'] as $other_id => $other)
+                            <tr>
+                              <td>{{$other['addon']->name}}</td>                
+                              <td class="text-right">{{$other['addon']->amount}}</td>
+                            </tr>
+                          @endforeach 
+                      @endif
+                      <tr>
+                        <th></th>
+                        <th rowspan="2" class="text-right">{{$plan->addon_total}}</th>
+                      </tr>
+                    </table>
                   @endforeach
-      
+                  
+                  
+
+
                 </div>
               </div>
             </div>

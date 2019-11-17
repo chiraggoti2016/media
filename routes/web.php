@@ -28,8 +28,14 @@ Route::group(['namespace' => 'Frontend'], function(){
     		Route::get('/sugguest/address', 'CartController@sugguestAddressAjax')->name('cart.sugguest.address');
     		Route::post('/check/address/availability', 'CartController@checkAddressAvailability')->name('cart.check.address.availability');
             Route::any('/process', 'CartController@process')->name('cart.process');
+            Route::any('/process/done', 'CartController@processDone')->name('cart.process.done');
 
             Route::post('/change/plan/{step}/{id}', 'CartController@changePlan')->name('cart.change.plan');
+
+
+            Route::post('/add/addon/{step}', 'CartController@addAddon')->name('cart.add.addon');
+            Route::post('/remove/addon/{step}', 'CartController@removeAddon')->name('cart.remove.addon');
+
     	});
         
         

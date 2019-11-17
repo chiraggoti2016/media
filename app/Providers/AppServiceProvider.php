@@ -37,17 +37,54 @@ class AppServiceProvider extends ServiceProvider
             $view->with('states', $states)->with('has_selected_state', $has_selected_state);
         });
 
-        view()->composer('layouts.checkout.footer', function ($view) {
+        view()->composer(['layouts.checkout.footer', 'cart.addons.internet'], function ($view) {
             
             $cart = Session::has('cart') ? Session::get('cart') : [];
-            $total = $discount = 0;
+
+
+            $stepqueue = Session::get('stepqueue');
+            
+            $process_done = false;
+            if(count($stepqueue)>0) {
+                $step = current($stepqueue);
+                $process_done = isset($cart['data'][$step]) && count($cart['data'][$step]) > 0;
+                $process_done = $process_done && isset($cart['addon'][$step]['modem']) && count($cart['addon'][$step]['modem']) > 0;
+            }
+
+            $total = $discount = $one_time = 0;
+
             foreach($cart['data'] as $plantype => $plan) {
                 $total += getPrice($plan);
                 $discount += getDiscount($plan);
+                $addon_total = 0;
+                if(isset($cart['addon'][$plantype]['modem'])) {
+                   foreach($cart['addon'][$plantype]['modem'] as $modem_id => $modem) {
+                        // $modem['addon'];
+                        if(in_array($modem['buying_method'], ['none', 'purchase'])) {
+                            $total += $modem['addon']->amount;
+                            $addon_total +=$modem['addon']->amount;
+                        } else {
+                            $total += $modem['addon']->rent_amount;
+                            $total += $modem['addon']->deposit;
+                            $one_time += $modem['addon']->deposit;
+                            $addon_total +=$modem['addon']->rent_amount;
+                            $addon_total +=$modem['addon']->deposit;
+                        }
+                   }
+                }
+                if(isset($cart['addon'][$plantype]['other'])) {
+                   foreach($cart['addon'][$plantype]['other'] as $other_id => $other) {
+                        $total += $other['addon']->amount;
+                        $addon_total +=$other['addon']->amount;
+                   } 
+                }
+                $cart['data'][$plantype]->addon_total = $addon_total; 
             };
             $cart['summary']['total'] = $total;
+            $cart['summary']['one_time'] = $one_time;
             $cart['summary']['discount'] = $discount;
-            $view->with('cart', $cart);
+
+            $view->with('cart', $cart)->with('process_done', $process_done);
         });
     }
 
