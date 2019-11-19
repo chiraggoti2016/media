@@ -146,5 +146,48 @@ class CartController extends Controller
         return redirect()->back();
     }
 
+    public function addInstallationCharge($amount) {
+
+        Session::put('cart.installation.charge', $amount);
+
+        return redirect()->back();
+    }
+
+    public function removeInstallationCharge() {
+
+        Session::forget('cart.installation.charge');
+
+        return redirect()->back();
+    }
+
+    public function submitInstallationData() {
+
+        $data = request()->all();
+
+        Session::put('cart.installation.data', $data);
+
+        return redirect()->back();
+    }
+
+    public function resetInstallationData() {
+
+        Session::forget('cart.installation.data');
+
+        return redirect()->back();
+    }
+
+    public function changeStep($step) {
+
+        $activestep = Session::get('activestep');
+
+        if($step>=0 && $step<$activestep) {
+            Session::put('activestep', $step);
+        }
+
+        return redirect()->back();
+    }
+
+    
+
 
 }

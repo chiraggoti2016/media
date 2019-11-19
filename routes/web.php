@@ -36,6 +36,15 @@ Route::group(['namespace' => 'Frontend'], function(){
             Route::post('/add/addon/{step}', 'CartController@addAddon')->name('cart.add.addon');
             Route::post('/remove/addon/{step}', 'CartController@removeAddon')->name('cart.remove.addon');
 
+            Route::get('/add/installation/charge/{amount}', 'CartController@addInstallationCharge')->name('cart.add.installation.charge');
+
+            Route::get('/remove/installation/charge/{amount}', 'CartController@removeInstallationCharge')->name('cart.remove.installation.charge');
+
+            Route::post('/submit/installation/data', 'CartController@submitInstallationData')->name('cart.submit.installation.data');
+
+            Route::get('/reset/installation/data', 'CartController@resetInstallationData')->name('cart.reset.installation.data');
+
+            Route::get('/change/step/{step}', 'CartController@changeStep')->name('cart.change.step');
     	});
         
         

@@ -24,8 +24,8 @@
     <div class="container">
         <ul class="progressbar">
             @php $active = 'active'; @endphp
-            @foreach($stepqueue as $_step)
-            <li class="{{$active}}" >{{ ucwords($_step) }}</li>
+            @foreach($stepqueue as $_istep=>$_step)
+            <li class="{{$active}}" > <a href="{{route('cart.change.step', $_istep)}}">{{ ucwords($_step) }}</a></li>
             @if($step==$_step) @php $active = ''; @endphp @endif
             @endforeach
     </ul>

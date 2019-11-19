@@ -37,18 +37,27 @@ class AppServiceProvider extends ServiceProvider
             $view->with('states', $states)->with('has_selected_state', $has_selected_state);
         });
 
-        view()->composer(['layouts.checkout.footer', 'cart.addons.internet'], function ($view) {
+        view()->composer(['layouts.checkout.footer', 'cart.addons.internet', 'cart.step.installation'], function ($view) {
             
             $cart = Session::has('cart') ? Session::get('cart') : [];
 
 
             $stepqueue = Session::get('stepqueue');
             
+            $activestep = Session::get('activestep');
+
             $process_done = false;
             if(count($stepqueue)>0) {
-                $step = current($stepqueue);
-                $process_done = isset($cart['data'][$step]) && count($cart['data'][$step]) > 0;
-                $process_done = $process_done && isset($cart['addon'][$step]['modem']) && count($cart['addon'][$step]['modem']) > 0;
+                
+                $step = isset($stepqueue[$activestep])?$stepqueue[$activestep]:current($stepqueue);
+
+                if(in_array($step, config('plantypes.list'))) {
+                    $process_done = isset($cart['data'][$step]) && count($cart['data'][$step]) > 0;
+                    $process_done = $process_done && isset($cart['addon'][$step]['modem']) && count($cart['addon'][$step]['modem']) > 0;                    
+                } elseif($step == 'installation') {
+                    $process_done = (isset($cart['installation']['data']));
+                }
+
             }
 
             $total = $discount = $one_time = 0;
@@ -79,7 +88,14 @@ class AppServiceProvider extends ServiceProvider
                    } 
                 }
                 $cart['data'][$plantype]->addon_total = $addon_total; 
-            };
+            }
+
+
+
+            if(isset($cart['installation']['charge'])){
+                $total += $cart['installation']['charge'];
+            }
+
             $cart['summary']['total'] = $total;
             $cart['summary']['one_time'] = $one_time;
             $cart['summary']['discount'] = $discount;

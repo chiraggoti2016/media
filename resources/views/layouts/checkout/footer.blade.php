@@ -142,6 +142,19 @@
 
 
                 </div>
+
+                @if(isset($cart['installation']['charge']))
+                <div class="col-sm-6">
+                  <h4>Installation</h4>
+                  <table>
+                    <tr>
+                      <td>Setup Charge</td>
+                      <td class="text-right">{{$cart['installation']['charge']}}</td>
+                    </tr>
+                  </table>
+                </div>
+                @endif
+
               </div>
             </div>
             <hr/>
