@@ -3,7 +3,7 @@
     ============================-->
     <section id="subscribe" class="bottom-cart-container">
       <div class="container wow">
-          @php($total = splitAmount($cart['summary']['total']))
+          @php($total = splitAmount($cart['summary']['grand_total']))
           
           <div class="row">
             <div class="col-lg-9">
@@ -28,9 +28,9 @@
                 
                   <p class="col">
                     Prorated first payment:
-                    <b>${{$cart['summary']['total']}}</b> <br/>
+                    <b>${{$cart['summary']['grand_total']}}</b> <br/>
                     One time charge:
-                    <b>$0.00</b>
+                    <b>${{$cart['summary']['one_time']}}</b>
 
                   </p>
 
@@ -46,7 +46,7 @@
             </div>
             <div class="col-lg-3 text-right">
                 <div class="form-row justify-content-center" id="next-form-container" >
-                  <form id="next-form" method="POST" action="{{($process_done)?route('cart.process.done'):''}}">
+                  <form id="next-form" method="POST" action="{{$next_url}}">
                     @csrf
                     <div class="next-form-input-container"></div>
                     <div class="col-auto">
@@ -80,12 +80,12 @@
                       </tr>
                       <tr>
                         <td>{{$plan->title}}</td>                
-                        <td class="text-right">{{$plan->price}}</td>                
+                        <td class="text-right">${{$plan->price}}</td>                
                       </tr>
                       @if(hasDiscount($plan))
                       <tr class="discount">
                         <td>Discount</td>                
-                        <td class="text-right">-{{getDiscount($plan)}}</td>                
+                        <td class="text-right">-${{getDiscount($plan)}}</td>                
                       </tr>
                       @endif
                       <tr class="line">
@@ -94,7 +94,7 @@
                         </td>
                       </tr>
                       <tr>
-                        <th rowspan="2" class="text-right">{{getPrice($plan)}}</th>
+                        <th rowspan="2" class="text-right">${{getPrice($plan)}}</th>
                       </tr>
                     </table>
 
@@ -108,16 +108,16 @@
                             @if(in_array($modem['buying_method'], ['none', 'purchase']))
                               <tr>
                                 <td>{{$modem['addon']->name}}</td>                
-                                <td class="text-right">{{$modem['addon']->amount}}</td>
+                                <td class="text-right">${{$modem['addon']->amount}}</td>
                               </tr>
                             @else
                               <tr>
                                 <td>{{$modem['addon']->name}} (Rent)</td>                
-                                <td class="text-right">{{$modem['addon']->rent_amount}}</td>
+                                <td class="text-right">${{$modem['addon']->rent_amount}}</td>
                               </tr>
                               <tr>
                                 <td>{{$modem['addon']->name}} (Deposite)</td>                
-                                <td class="text-right">{{$modem['addon']->deposit}}</td>
+                                <td class="text-right">${{$modem['addon']->deposit}}</td>
                               </tr>
                             @endif
                           @endforeach 
@@ -127,13 +127,13 @@
                           @foreach($cart['addon'][$plantype]['other'] as $other_id => $other)
                             <tr>
                               <td>{{$other['addon']->name}}</td>                
-                              <td class="text-right">{{$other['addon']->amount}}</td>
+                              <td class="text-right">${{$other['addon']->amount}}</td>
                             </tr>
                           @endforeach 
                       @endif
                       <tr>
                         <th></th>
-                        <th rowspan="2" class="text-right">{{$plan->addon_total}}</th>
+                        <th rowspan="2" class="text-right">${{$plan->addon_total}}</th>
                       </tr>
                     </table>
                   @endforeach
@@ -149,17 +149,38 @@
                   <table>
                     <tr>
                       <td>Setup Charge</td>
-                      <td class="text-right">{{$cart['installation']['charge']}}</td>
+                      <td class="text-right">${{$cart['installation']['charge']}}</td>
                     </tr>
                   </table>
                 </div>
+                @endif
+
+                @if(isset($cart['summary']['shipping']))
+              
+                  <table>
+                    <tr>
+                      <td>Shipping</td>
+                      <th class="text-right">${{$cart['summary']['shipping']}}</th>
+                    </tr>
+
+                    <tr>
+                      <td>Total</td>
+                      <th class="text-right">${{$cart['summary']['total']}}</th>
+                    </tr>
+
+                    <tr>
+                      <td>Tax</td>
+                      <th class="text-right">${{$cart['summary']['tax']}}</th>
+                    </tr>
+                  </table>
+                
                 @endif
 
               </div>
             </div>
             <hr/>
             <div class="col-auto text-right">
-              <h3>Total: <i>${{$cart['summary']['total']}}</i></h3> 
+              <h3>Grand Total: <b>${{$cart['summary']['grand_total']}}</b></h3> 
             </div>
           </div>
 

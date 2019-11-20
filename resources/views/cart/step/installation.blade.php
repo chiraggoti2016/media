@@ -14,24 +14,28 @@
           </div>
 
         </div>
+
+        @php $installation_charge = setting('site.internet_installation_charge'); @endphp
         <div class="row">
           <div class="col-lg-8">
             <h4>Installation required</h4>
             @if(isset($cart['installation']['charge']))
-              <p><span class="label label-primary">$40.00, INSTALLATION IS REQUIRED</span></p>
+              <p><span class="label label-primary">${{$installation_charge}}, INSTALLATION IS REQUIRED</span></p>
             @else
               <p>A technician will activate or install your service</p>
             @endif
           </div>
+
+          @php $price = splitAmount($installation_charge); @endphp
           <div class="col-lg-4 text-center change-link-container">
             <div class="row">
               <div class="col-sm-6 text-right">
                 <h6 class="card-price new-price">
                     <div class="featured-new__price-helper card-price-black">
                           <div class="price price--format_english ">
-                            $<span class="price__value--dollars">40</span>
+                            $<span class="price__value--dollars">{{$price['whole']}}</span>
                             <span class="price__group">
-                              <span class="price__value--cents">.00</span>
+                              <span class="price__value--cents">.{{$price['decimal']}}</span>
                               <div class="price__period"></div>
                             </span>
                           </div>
@@ -41,9 +45,9 @@
               <div class="col-sm-6 text-center">
                   @if(isset($cart['installation']['charge']))
                       <div class="checkout-success"><i class="fa fa-check"></i></div>          
-                      <a href="{{route('cart.remove.installation.charge',40.00)}}">Change</a>
+                      <a href="{{route('cart.remove.installation.charge')}}">Change</a>
                   @else  
-                    <a href="{{route('cart.add.installation.charge',40.00)}}" class="select-btn select">Confirm</a>
+                    <a href="{{route('cart.add.installation.charge',setting('site.internet_installation_charge'))}}" class="select-btn select">Confirm</a>
                   @endif
               </div>
             </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Plan;
 use App\Addon;
+use App\Order;
 use Session;
 
 class CartController extends Controller
@@ -99,6 +100,42 @@ class CartController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function doPayment() {
+        $cart = Session::has('cart') ? Session::get('cart') : [];
+
+        doCartCalculation($cart);
+
+        $order_data = [
+            'name' => $cart['installation']['data']['installation_name'],
+            'phone_number' => $cart['installation']['data']['phone_number'],
+            'plan_id' => $cart['data']['internet']->id,
+            'plan_install_fee' => $cart['installation']['charge'],
+            'install_date1' => $cart['installation']['data']['install_date1'],
+            'install_date2' => $cart['installation']['data']['install_date2'],
+            'install_date3' => $cart['installation']['data']['install_date3'],
+            'install_time1' => $cart['installation']['data']['install_time1'],
+            'install_time2' => $cart['installation']['data']['install_time2'],
+            'install_time3' => $cart['installation']['data']['install_time3'],
+            'installation_addr' => $cart['installation']['data']['installation_address'],
+            'addons_data' => json_encode($cart['addon']),
+            "total" => $cart['summary']['total'],
+            "discount" => $cart['summary']['discount'],
+            "tax" => $cart['summary']['tax'],
+            "shipping" => $cart['summary']['shipping'],
+            "grand_total" => $cart['summary']['grand_total'],
+        ];
+        $order = Order::create($order_data);
+
+
+        if($order){
+            Session::forget(['checkavailability', 'cart', 'availableplan', 'stepqueue', 'activestep']);
+
+            // Session::flush(); 
+        }
+
+        return redirect()->route('order.complete');
     }
 
 

@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('states', $states)->with('has_selected_state', $has_selected_state);
         });
 
-        view()->composer(['layouts.checkout.footer', 'cart.addons.internet', 'cart.step.installation'], function ($view) {
+        view()->composer(['layouts.checkout.footer', 'cart.addons.internet', 'cart.step.installation','cart.step.summary'], function ($view) {
             
             $cart = Session::has('cart') ? Session::get('cart') : [];
 
@@ -47,6 +47,7 @@ class AppServiceProvider extends ServiceProvider
             $activestep = Session::get('activestep');
 
             $process_done = false;
+            $next_url = '';
             if(count($stepqueue)>0) {
                 
                 $step = isset($stepqueue[$activestep])?$stepqueue[$activestep]:current($stepqueue);
@@ -56,51 +57,17 @@ class AppServiceProvider extends ServiceProvider
                     $process_done = $process_done && isset($cart['addon'][$step]['modem']) && count($cart['addon'][$step]['modem']) > 0;                    
                 } elseif($step == 'installation') {
                     $process_done = (isset($cart['installation']['data']));
+                } elseif($step == 'summary') {
+                    $process_done = true;
                 }
+
+                $next_url = ($process_done) ? (($step == 'summary')?route('cart.do.payment'):route('cart.process.done')) : '';
 
             }
 
-            $total = $discount = $one_time = 0;
+            doCartCalculation($cart);
 
-            foreach($cart['data'] as $plantype => $plan) {
-                $total += getPrice($plan);
-                $discount += getDiscount($plan);
-                $addon_total = 0;
-                if(isset($cart['addon'][$plantype]['modem'])) {
-                   foreach($cart['addon'][$plantype]['modem'] as $modem_id => $modem) {
-                        // $modem['addon'];
-                        if(in_array($modem['buying_method'], ['none', 'purchase'])) {
-                            $total += $modem['addon']->amount;
-                            $addon_total +=$modem['addon']->amount;
-                        } else {
-                            $total += $modem['addon']->rent_amount;
-                            $total += $modem['addon']->deposit;
-                            $one_time += $modem['addon']->deposit;
-                            $addon_total +=$modem['addon']->rent_amount;
-                            $addon_total +=$modem['addon']->deposit;
-                        }
-                   }
-                }
-                if(isset($cart['addon'][$plantype]['other'])) {
-                   foreach($cart['addon'][$plantype]['other'] as $other_id => $other) {
-                        $total += $other['addon']->amount;
-                        $addon_total +=$other['addon']->amount;
-                   } 
-                }
-                $cart['data'][$plantype]->addon_total = $addon_total; 
-            }
-
-
-
-            if(isset($cart['installation']['charge'])){
-                $total += $cart['installation']['charge'];
-            }
-
-            $cart['summary']['total'] = $total;
-            $cart['summary']['one_time'] = $one_time;
-            $cart['summary']['discount'] = $discount;
-
-            $view->with('cart', $cart)->with('process_done', $process_done);
+            $view->with('cart', $cart)->with('process_done', $process_done)->with('next_url', $next_url);
         });
     }
 

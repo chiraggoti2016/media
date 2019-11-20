@@ -2,7 +2,7 @@
 if (!function_exists('splitAmount')) {
 	function splitAmount($amount = 0.0){
 		$whole = $decimal = 0;
-		if($amount) list($whole, $decimal) = explode('.', (float)$amount);
+		if($amount) list($whole, $decimal) = explode('.', $amount);
 		return ['whole' => $whole, 'decimal' => $decimal];
 	}
 }
@@ -46,5 +46,56 @@ if (!function_exists('getDiscount')) {
 			}
 		}
 		return number_format($discount,2);
+	}
+}
+if (!function_exists('doCartCalculation')) {
+	function doCartCalculation(&$cart){
+	
+		$total = $discount = $one_time = 0;
+		if(isset($cart['data'])) {
+		    foreach($cart['data'] as $plantype => $plan) {
+		        $total += getPrice($plan);
+		        $discount += getDiscount($plan);
+		        $addon_total = 0;
+		        if(isset($cart['addon'][$plantype]['modem'])) {
+		           foreach($cart['addon'][$plantype]['modem'] as $modem_id => $modem) {
+		                // $modem['addon'];
+		                if(in_array($modem['buying_method'], ['none', 'purchase'])) {
+		                    $total += $modem['addon']->amount;
+		                    $addon_total +=$modem['addon']->amount;
+		                } else {
+		                    $total += $modem['addon']->rent_amount;
+		                    $total += $modem['addon']->deposit;
+		                    $one_time += $modem['addon']->deposit;
+		                    $addon_total +=$modem['addon']->rent_amount;
+		                    $addon_total +=$modem['addon']->deposit;
+		                }
+		           }
+		        }
+		        if(isset($cart['addon'][$plantype]['other'])) {
+		           foreach($cart['addon'][$plantype]['other'] as $other_id => $other) {
+		                $total += $other['addon']->amount;
+		                $addon_total +=$other['addon']->amount;
+		           } 
+		        }
+		        $cart['data'][$plantype]->addon_total = $addon_total; 
+		    }
+		}
+
+	    if(isset($cart['installation']['charge'])){
+	        $total += $cart['installation']['charge'];
+	    }
+	    $shipping = setting('site.shipping-charge') ?? 0;
+	    $total += $shipping;
+	    $tax = ($total * (setting('site.tax') ?? 0) / 100);
+	    $grand_total = $total + $tax;
+
+	    $cart['summary']['total'] = $total;
+	    $cart['summary']['one_time'] = $one_time;
+	    $cart['summary']['discount'] = $discount;
+	    $cart['summary']['tax'] = $tax;
+	    $cart['summary']['shipping'] = $shipping;
+	    $cart['summary']['grand_total'] = $grand_total;
+		return $cart;
 	}
 }
