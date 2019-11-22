@@ -80,6 +80,8 @@
 
 @php $_otherkeys = count($_otherdata) ? array_keys($_otherdata) : []; @endphp
 
+@if(isset($cart['addon']['internet']['modem'])) 
+
  <div class="row">
   <div class="col-lg-9">
     <h3>Add-ons</h3>
@@ -103,6 +105,8 @@
 	  @endif
   </div>
 </div>
+
+@endif
 
 <div class="row" id="other-container" style="display: none;">
  <div class="container alternate">
