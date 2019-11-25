@@ -46,14 +46,21 @@
             </div>
             <div class="col-lg-3 text-right">
                 <div class="form-row justify-content-center" id="next-form-container" >
-                  <form id="next-form" method="POST" action="{{$next_url}}">
-                    @csrf
-                    <div class="next-form-input-container"></div>
-                    <div class="col-auto">
-                      <button type="submit" id="next-btn" class="next-btn" {{(!$process_done)?'disabled="disabled"':''}}>Next</button>
-                      }
-                    </div>
-                  </form>
+                  @if($step == 'payment')
+                      <div class="next-form-input-container"></div>
+                      <div class="col-auto">
+                        <button type="button" id="footer-submit-btn" class="footer-submit-btn" >Submit</button>
+                      </div>
+                  @else
+                    <form id="next-form" method="POST" action="{{$next_url}}">
+                      @csrf
+                      <div class="next-form-input-container"></div>
+                      <div class="col-auto">
+                        <button type="submit" id="next-btn" class="next-btn" {{(!$process_done)?'disabled="disabled"':''}}>{{($step == 'payment')?'Submit':'Next'}}</button>
+                      </div>
+                    </form>
+                  @endif
+                  
                 </div>
 
                 <div class="close-button" style="display: none;">

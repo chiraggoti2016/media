@@ -99,3 +99,41 @@ if (!function_exists('doCartCalculation')) {
 		return $cart;
 	}
 }
+
+if (!function_exists('paymentGateway')) {
+	function paymentGateway($data, $order) {
+		return true;
+		$merchant_id = ''; //INSERT MERCHANT ID (must be a 9 digit string)
+		$api_key = ''; //INSERT API ACCESS PASSCODE
+		$api_version = 'v1'; //default
+		$platform = 'api'; //default
+
+		//Create Beanstream Gateway
+		$beanstream = new \Beanstream\Gateway($merchant_id, $api_key, $platform, $api_version);
+
+		//Example Card Payment Data
+		$payment_data = array(
+		        'order_number' => $order['ordernumber'],
+		        'amount' => $order['grand_total'],
+		        'payment_method' => 'card',
+		        'card' => array(
+		            'name' => $data['name'],
+		            'number' => $data['account_number'],
+		            'expiry_month' => $data['expiry_month'],
+		            'expiry_year' => $data['expiry_year'],
+		            'cvd' => $data['cvd'],
+		        )
+		);
+		$complete = TRUE; //set to FALSE for PA
+
+		//Try to submit a Card Payment
+		try {
+
+			$result = $beanstream->payments()->makeCardPayment($payment_data, $complete);
+
+		} catch (\Beanstream\Exception $e) {
+
+		}
+		return true;
+	}
+}

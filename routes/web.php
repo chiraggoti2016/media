@@ -45,6 +45,7 @@ Route::group(['namespace' => 'Frontend'], function(){
             Route::get('/reset/installation/data', 'CartController@resetInstallationData')->name('cart.reset.installation.data');
 
             Route::get('/change/step/{step}', 'CartController@changeStep')->name('cart.change.step');
+
             Route::post('/do/payment', 'CartController@doPayment')->name('cart.do.payment');
     	});
         

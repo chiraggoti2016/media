@@ -48,6 +48,7 @@ class AppServiceProvider extends ServiceProvider
 
             $process_done = false;
             $next_url = '';
+            $step = '';
             if(count($stepqueue)>0) {
                 
                 $step = isset($stepqueue[$activestep])?$stepqueue[$activestep]:current($stepqueue);
@@ -59,15 +60,17 @@ class AppServiceProvider extends ServiceProvider
                     $process_done = (isset($cart['installation']['data']));
                 } elseif($step == 'summary') {
                     $process_done = true;
+                } elseif($step == 'payment') {
+                    $process_done = true;
                 }
 
-                $next_url = ($process_done) ? (($step == 'summary')?route('cart.do.payment'):route('cart.process.done')) : '';
+                $next_url = ($process_done) ? (($step == 'payment')?route('cart.do.payment'):route('cart.process.done')) : '';
 
             }
 
             doCartCalculation($cart);
 
-            $view->with('cart', $cart)->with('process_done', $process_done)->with('next_url', $next_url);
+            $view->with('cart', $cart)->with('process_done', $process_done)->with('next_url', $next_url)->with('step', $step);
         });
     }
 

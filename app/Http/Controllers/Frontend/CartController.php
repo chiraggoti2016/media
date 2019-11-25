@@ -104,7 +104,7 @@ class CartController extends Controller
 
     public function doPayment() {
         $cart = Session::has('cart') ? Session::get('cart') : [];
-
+        
         doCartCalculation($cart);
 
         $order_data = [
@@ -125,21 +125,26 @@ class CartController extends Controller
             "tax" => $cart['summary']['tax'],
             "shipping" => $cart['summary']['shipping'],
             "grand_total" => $cart['summary']['grand_total'],
+            "ordernumber" => 'ORD' . time(),
         ];
-        $order = Order::create($order_data);
 
+        $data = request()->all();
+        if(paymentGateway($data, $order_data)) {
 
-        if($order){
-            Session::forget(['checkavailability', 'cart', 'availableplan', 'stepqueue', 'activestep']);
+            $order = Order::create($order_data);
 
-            // Session::flush(); 
+            if($order){
+
+                Session::forget(['checkavailability', 'cart', 'availableplan', 'stepqueue', 'activestep']);
+
+                // Session::flush(); 
+            }
+
+            return redirect()->route('order.complete');
+
         }
-
-        return redirect()->route('order.complete');
+        return redirect()->back();
     }
-
-
-
 
     public function changePlan($step, $id) {
         $plan = Plan::find($id);
