@@ -102,15 +102,6 @@ if (!function_exists('doCartCalculation')) {
 
 if (!function_exists('paymentGateway')) {
 	function paymentGateway($data, $order) {
-		return true;
-		$merchant_id = ''; //INSERT MERCHANT ID (must be a 9 digit string)
-		$api_key = ''; //INSERT API ACCESS PASSCODE
-		$api_version = 'v1'; //default
-		$platform = 'api'; //default
-
-		//Create Beanstream Gateway
-		$beanstream = new \Beanstream\Gateway($merchant_id, $api_key, $platform, $api_version);
-
 		//Example Card Payment Data
 		$payment_data = array(
 		        'order_number' => $order['ordernumber'],
@@ -124,16 +115,7 @@ if (!function_exists('paymentGateway')) {
 		            'cvd' => $data['cvd'],
 		        )
 		);
-		$complete = TRUE; //set to FALSE for PA
 
-		//Try to submit a Card Payment
-		try {
-
-			$result = $beanstream->payments()->makeCardPayment($payment_data, $complete);
-
-		} catch (\Beanstream\Exception $e) {
-
-		}
-		return true;
+		return (new Bambora)->makeCardPayment($payment_data);
 	}
 }

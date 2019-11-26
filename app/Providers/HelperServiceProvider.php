@@ -27,5 +27,10 @@ class HelperServiceProvider extends ServiceProvider
         if (file_exists($file)) {
             require_once($file);
         }
+
+        $file = app_path('Helpers/Bambora.php');
+        if (file_exists($file)) {
+            require_once($file);
+        }
     }
 }
