@@ -1,10 +1,9 @@
 <?php
 	require 'beanstream-php/vendor/autoload.php';
 	
-
 	class Bambora {
-		private $merchant_id = ''; //INSERT MERCHANT ID (must be a 9 digit string)
-		private $api_key = ''; //INSERT API ACCESS PASSCODE
+		private $merchant_id = '300211772'; //INSERT MERCHANT ID (must be a 9 digit string)
+		private $api_key = '883793b67bCD4B0dA28E72a6d7778502'; //INSERT API ACCESS PASSCODE
 		private $api_version = 'v1'; //default
 		private $platform = 'api'; //default
 
@@ -26,14 +25,16 @@
 			try {
 
 				$result = $this->beanstream->payments()->makeCardPayment($payment_data, $complete);
-			    	
+
+			    return $result;
+
 			    /*
 			     * Handle successful transaction, payment method returns
 			     * transaction details as result, so $result contains that data
 			     * in the form of associative array.
 			     */
 			} catch (\Beanstream\Exception $e) {
-				return false;
+
 			    /*
 			     * Handle transaction error, $e->code can be checked for a
 			     * specific error, e.g. 211 corresponds to transaction being
@@ -41,7 +42,7 @@
 			     * etc.
 			     */
 			}
-			return true;
+			return false;
 	  	}
 
 	} 

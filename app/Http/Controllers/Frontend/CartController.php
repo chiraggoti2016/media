@@ -107,6 +107,8 @@ class CartController extends Controller
         
         doCartCalculation($cart);
 
+        $data = request()->all();
+
         $order_data = [
             'name' => $cart['installation']['data']['installation_name'],
             'phone_number' => $cart['installation']['data']['phone_number'],
@@ -125,10 +127,15 @@ class CartController extends Controller
             "tax" => $cart['summary']['tax'],
             "shipping" => $cart['summary']['shipping'],
             "grand_total" => $cart['summary']['grand_total'],
-            "ordernumber" => 'ORD' . time(),
+            "order_number" => 'ORD' . time(),
+            "first_name" => $data['first_name'],
+            "last_name" => $data['last_name'],
+            "email" => $data['email'],
+            "homephone" => $data['homephone'],
+            "cellphone" => $data['cellphone'],
+            "prefered_method" => $data['prefered_method'],
         ];
 
-        $data = request()->all();
         if(paymentGateway($data, $order_data)) {
 
             $order = Order::create($order_data);

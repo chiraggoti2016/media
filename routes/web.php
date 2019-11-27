@@ -20,6 +20,9 @@ Route::group(['namespace' => 'Frontend'], function(){
 	Route::group(['middleware' => 'locale'], function(){
 		// HomeController
 		Route::get('/', 'HomeController@index');
+        Route::get('/test',function(){
+            dd(new Bambora);
+        });
 		Route::post('/set-state', 'HomeController@setState')->name('set-state');
 
 		// CartController

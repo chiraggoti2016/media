@@ -104,11 +104,11 @@ if (!function_exists('paymentGateway')) {
 	function paymentGateway($data, $order) {
 		//Example Card Payment Data
 		$payment_data = array(
-		        'order_number' => $order['ordernumber'],
+		        'order_number' => $order['order_number'],
 		        'amount' => $order['grand_total'],
 		        'payment_method' => 'card',
 		        'card' => array(
-		            'name' => $data['name'],
+		            'name' => $data['holder_name'],
 		            'number' => $data['account_number'],
 		            'expiry_month' => $data['expiry_month'],
 		            'expiry_year' => $data['expiry_year'],
@@ -116,6 +116,29 @@ if (!function_exists('paymentGateway')) {
 		        )
 		);
 
-		return (new Bambora)->makeCardPayment($payment_data);
+		$result = (new Bambora)->makeCardPayment($payment_data);
+
+		if($result) {
+
+			$transaction_data = [
+				'transaction_id' => isset($result['id'])?$result['id']:'', 
+				'authorizing_merchant_id' => isset($result['authorizing_merchant_id'])?$result['authorizing_merchant_id']:'', 
+				'approved' => isset($result['approved'])?$result['approved']:'', 
+				'message' => isset($result['message'])?$result['message']:'', 
+				'auth_code' => isset($result['auth_code'])?$result['auth_code']:'', 
+				'transaction_created' => isset($result['created'])?$result['created']:'', 
+				'order_number' => isset($result['order_number'])?$result['order_number']:'', 
+				'type' => isset($result['type'])?$result['type']:'', 
+				'payment_method' => isset($result['payment_method'])?$result['payment_method']:'', 
+				'risk_score' => isset($result['risk_score'])?$result['risk_score']:'', 
+				'amount' => isset($result['amount'])?$result['amount']:'', 
+				'jsondata' => is_array($result) ? json_encode($result) : '[]', 
+			];
+
+			\App\Transaction::create($transaction_data);
+
+			return true;
+		}
+		return false;
 	}
 }
