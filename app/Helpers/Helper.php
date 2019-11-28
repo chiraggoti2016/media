@@ -53,37 +53,43 @@ if (!function_exists('doCartCalculation')) {
 	
 		$total = $discount = $one_time = 0;
 		if(isset($cart['data'])) {
+			$cart['current_per'] = 100;
+			$cart['planamounts'] = 0;
 		    foreach($cart['data'] as $plantype => $plan) {
 		        $total += getPrice($plan);
+		        $cart['planamounts'] += getPrice($plan);
 		        $discount += getDiscount($plan);
 		        $addon_total = 0;
 		        if(isset($cart['addon'][$plantype]['modem'])) {
 		           foreach($cart['addon'][$plantype]['modem'] as $modem_id => $modem) {
-		                // $modem['addon'];
+
 		                if(in_array($modem['buying_method'], ['none', 'purchase'])) {
-		                    $total += $modem['addon']->amount;
-		                    $addon_total +=$modem['addon']->amount;
+
+		                	$current_purchase = $modem['addon']->amount;
+		                	$one_time += $current_purchase;
+		                    $addon_total +=$current_purchase;
 		                } else {
-		                    $total += $modem['addon']->rent_amount;
-		                    $total += $modem['addon']->deposit;
-		                    $one_time += $modem['addon']->deposit;
-		                    $addon_total +=$modem['addon']->rent_amount;
-		                    $addon_total +=$modem['addon']->deposit;
+
+		                	$current_rent = $modem['addon']->rent_amount;
+		                    $one_time += ($modem['addon']->deposit + $current_rent);
+		                    $addon_total +=($current_rent + $modem['addon']->deposit);
 		                }
 		           }
 		        }
 		        if(isset($cart['addon'][$plantype]['other'])) {
 		           foreach($cart['addon'][$plantype]['other'] as $other_id => $other) {
-		                $total += $other['addon']->amount;
-		                $addon_total +=$other['addon']->amount;
+		                // $one_time += $other['addon']->amount;
+						$addon_total +=$other['addon']->amount;
 		           } 
 		        }
+		        $total += $addon_total;
 		        $cart['data'][$plantype]->addon_total = $addon_total; 
 		    }
 		}
 
 	    if(isset($cart['installation']['charge'])){
-	        $total += $cart['installation']['charge'];
+			$one_time += $cart['installation']['charge'];
+		    $total += $cart['installation']['charge'];
 	    }
 	    $shipping = setting('site.shipping-charge') ?? 0;
 	    $total += $shipping;
@@ -140,5 +146,15 @@ if (!function_exists('paymentGateway')) {
 			return true;
 		}
 		return false;
+	}
+}
+
+if (!function_exists('getCurrentPaymentAmount')) {
+	function getCurrentPaymentAmount($amount, $per){
+		if(isset($amount) && $amount>0) {
+			$final = $amount * $per / 100;
+			return number_format($final,2);			
+		}
+		return 0;
 	}
 }

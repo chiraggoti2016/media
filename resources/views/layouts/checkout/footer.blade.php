@@ -3,7 +3,7 @@
     ============================-->
     <section id="subscribe" class="bottom-cart-container">
       <div class="container wow">
-          @php($total = splitAmount($cart['summary']['grand_total']))
+          @php($total = splitAmount($cart['planamounts']))
           
           <div class="row">
             <div class="col-lg-9">
@@ -61,12 +61,6 @@
                     </form>
                   @endif
                   
-                </div>
-
-                <div class="close-button" style="display: none;">
-                    <button type="button" id="close-cart-details">
-                        × <span class="shopping-cart__btn-close-label">Close</span>
-                    </button>
                 </div>
 
             </div>
@@ -186,8 +180,17 @@
               </div>
             </div>
             <hr/>
-            <div class="col-auto text-right">
-              <h3>Grand Total: <b>${{$cart['summary']['grand_total']}}</b></h3> 
+            <div class="row">
+              <div class="col-sm-6 text-left">
+                <div class="close-button" style="display: none;">
+                    <button type="button" id="close-cart-details">
+                        × <span class="shopping-cart__btn-close-label">Close</span>
+                    </button>
+                </div>
+              </div>            
+              <div class="col-sm-6 text-right">
+                <h3>Grand Total: <b>${{$cart['summary']['grand_total']}}</b></h3> 
+              </div>
             </div>
           </div>
 
