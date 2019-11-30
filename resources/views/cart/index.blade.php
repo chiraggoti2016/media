@@ -201,12 +201,14 @@
                 icon: 'error'
                });
               $( 'input[name="selection[]"]' ).prop( "checked", false );
-
+              $( 'input[name="selection[]"]' ).attr( "disabled", true );
               $('.service').each(function(){
                   $(this).removeClass('service-checked');
               });
 
              } else {
+              $( 'input[name="selection[]"]' ).attr( "disabled", false );
+
               for(i in data.checkedable ) {
                 $('#checkbox-' + data.checkedable[i]).prop( "checked", true );
                 $('#checkbox-' + data.checkedable[i]).parents('.service').addClass('service-checked');
