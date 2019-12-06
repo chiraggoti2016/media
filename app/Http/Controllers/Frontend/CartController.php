@@ -69,9 +69,12 @@ class CartController extends Controller
         
         if(count($stepqueue)>0) {
             $step = isset($stepqueue[$activestep]) ? $stepqueue[$activestep] : current($stepqueue);
-        
+            $addons = $alternate_plans = [];
+            
             if($step == 'internet') {
                 $availableplanId = Session::get('availableplan.'.$step);
+
+            
                 $plan = Plan::find($availableplanId);
 
                 $alternate_plans = Plan::where('type', $step)->get();
@@ -79,6 +82,15 @@ class CartController extends Controller
                 $addons['modem'] = Addon::where('type', $step)->where('device_type', 'modem')->get();
                 $addons['other'] = Addon::where('type', $step)->where('device_type', '!=','modem')->get();
                 
+                Session::put('cart.data.' . $step, $plan);                
+            } elseif($step == 'tv') {
+            
+                $availableplanId = Session::get('availableplan.'.$step);
+
+                $plan = Plan::find($availableplanId);
+
+                $alternate_plans = Plan::where('type', $step)->get();
+
                 Session::put('cart.data.' . $step, $plan);                
             }
             

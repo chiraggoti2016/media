@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('states', $states)->with('has_selected_state', $has_selected_state);
         });
 
-        view()->composer(['layouts.checkout.footer', 'cart.addons.internet', 'cart.step.installation','cart.step.summary','cart.step.internet'], function ($view) {
+        view()->composer(['layouts.checkout.footer', 'cart.addons.internet', 'cart.step.installation','cart.step.summary','cart.step.internet', 'cart.step.tv'], function ($view) {
             
             $cart = Session::has('cart') ? Session::get('cart') : [];
 
