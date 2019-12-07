@@ -55,7 +55,10 @@ class AppServiceProvider extends ServiceProvider
 
                 if(in_array($step, config('plantypes.list'))) {
                     $process_done = isset($cart['data'][$step]) && count($cart['data'][$step]) > 0;
-                    $process_done = $process_done && isset($cart['addon'][$step]['modem']) && count($cart['addon'][$step]['modem']) > 0;                    
+
+                    if($step == 'internet') {
+                        $process_done = $process_done && isset($cart['addon'][$step]['modem']) && count($cart['addon'][$step]['modem']) > 0;                    
+                    }
                 } elseif($step == 'installation') {
                     $process_done = (isset($cart['installation']['data']));
                 } elseif($step == 'summary') {

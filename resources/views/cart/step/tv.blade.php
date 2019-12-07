@@ -14,14 +14,10 @@
               <h3>Tv Plans</h3>
               <p>Your plan: <label class="label label-primary">{{ $plan->title }}</label></p>
             </div>
-            <div class="col-lg-3 text-center change-link-container">
-                <div class="checkout-success"><i class="fa fa-check"></i></div>
-                <a href="#" id="change-plan-link">Change</a>            
-            </div>
           </div>
 
           @if(isset($cart['data']['tv'])) 
-            <div class="row" id="alternate-container" style="display: none;">
+            <div class="row" id="alternate-container" >
               @if (view()->exists('cart.alternate.' . strtolower(str_replace('_','-',$plan->type)))) 
                 @include('cart.alternate.' . strtolower(str_replace('_','-',$plan->type)), ['alternate_plans' => $alternate_plans, 'plan' => $plan])
               @endif
@@ -48,12 +44,13 @@
         plan = $(this).data('plan-id');
         next_url = $(this).data('next-url');
         $('#next-form').attr('action', next_url);
+        $("#next-btn").attr("disabled", false);
       });
 
       $('#change-plan-link').click(function(){
         $(this).parent().hide();
         $('#alternate-container').show();
-        $("#next-btn").attr("disabled", false);
+        // $("#next-btn").attr("disabled", false);
       });
     </script>
   @endpush

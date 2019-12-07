@@ -48,11 +48,12 @@
           <div class="col-lg-4">
             <div class="card mb-5 mb-lg-0">
               <div class="card-body">
-                <h5 class="card-title text-muted text-uppercase text-center">{{$plan->tagline}}</h5>
+
+                <h5 class="card-title text-muted text-uppercase text-center">{{$plan->title}}</h5>
                 <h6 class="card-price text-center">
                   <div class="featured-new__price-helper">
                         <div class="price price--format_english">
-                          <div class="price__from">{{$plan->title}}</div>
+                          <div class="price__from">{{ str_replace('-','',$plan->tagline)}}</div>
                           $<span class="price__value--dollars">{{ $price['whole'] }}</span>
                           <span class="price__group">
                             <span class="price__value--cents">.{{ $price['decimal'] }}</span>
@@ -61,7 +62,17 @@
                         </div>
                   </div>
                 </h6>
-                
+                  
+                @if(strtolower($plan->type) == 'tv')
+                  <hr/>
+                  <div class="row">
+                      @foreach($plan->channels->take(5) as $channel)
+                        <span class="ml-2 mr-2">
+                          @php echo $channel->logo_tag; @endphp
+                        </span>
+                      @endforeach
+                  </div>
+                @endif
                 @if(!empty($plan->downspeed) && !empty($plan->upspeed))
                     <hr>
                     @if(strtolower($plan->type) == 'internet')

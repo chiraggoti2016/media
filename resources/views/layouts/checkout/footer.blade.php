@@ -73,7 +73,7 @@
               <div class="row">
                 <div class="col-sm-6">
                   @foreach($cart['data'] as $plantype => $plan) 
-                    <h4>Internet</h4>
+                    <h4>{{ucwords($plantype)}}</h4>
                     <table>
                       <tr>
                         <th>Plan</th>

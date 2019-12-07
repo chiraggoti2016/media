@@ -29,8 +29,7 @@ class HomeController extends Controller
 
     public function plan($type)
     {
-        $plans = \DB::select("SELECT *  FROM `plans` WHERE `plans`.`type` = '{$type}'");
-
+        $plans = Plan::where('type', "{$type}")->get();
         return view('home.plan', compact('plans'));
     }
     

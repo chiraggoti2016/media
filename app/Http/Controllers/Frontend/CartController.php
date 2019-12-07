@@ -115,53 +115,66 @@ class CartController extends Controller
     }
 
     public function doPayment() {
-        $cart = Session::has('cart') ? Session::get('cart') : [];
-        
-        doCartCalculation($cart);
+        \DB::beginTransaction();
+        try{
+            $cart = Session::has('cart') ? Session::get('cart') : [];
 
-        $data = request()->all();
-
-        $order_data = [
-            'name' => $cart['installation']['data']['installation_name'],
-            'phone_number' => $cart['installation']['data']['phone_number'],
-            'plan_id' => $cart['data']['internet']->id,
-            'plan_install_fee' => $cart['installation']['charge'],
-            'install_date1' => $cart['installation']['data']['install_date1'],
-            'install_date2' => $cart['installation']['data']['install_date2'],
-            'install_date3' => $cart['installation']['data']['install_date3'],
-            'install_time1' => $cart['installation']['data']['install_time1'],
-            'install_time2' => $cart['installation']['data']['install_time2'],
-            'install_time3' => $cart['installation']['data']['install_time3'],
-            'installation_addr' => $cart['installation']['data']['installation_address'],
-            'addons_data' => json_encode($cart['addon']),
-            "total" => $cart['summary']['total'],
-            "discount" => $cart['summary']['discount'],
-            "tax" => $cart['summary']['tax'],
-            "shipping" => $cart['summary']['shipping'],
-            "grand_total" => $cart['summary']['grand_total'],
-            "order_number" => 'ORD' . time(),
-            "first_name" => $data['first_name'],
-            "last_name" => $data['last_name'],
-            "email" => $data['email'],
-            "homephone" => $data['homephone'],
-            "cellphone" => $data['cellphone'],
-            "prefered_method" => $data['prefered_method'],
-        ];
-
-        if(paymentGateway($data, $order_data)) {
-
-            $order = Order::create($order_data);
-
-            if($order){
-
-                Session::forget(['checkavailability', 'cart', 'availableplan', 'stepqueue', 'activestep']);
-
-                // Session::flush(); 
+            $planIds = [];
+            foreach($cart['data'] as $eachplan) {
+                $planIds[] = $eachplan->id;
             }
 
-            return redirect()->route('order.complete');
+            doCartCalculation($cart);
 
+            $data = request()->all();
+
+            $order_data = [
+                'name' => $cart['installation']['data']['installation_name'],
+                'phone_number' => $cart['installation']['data']['phone_number'],
+                // 'plan_id' => $cart['data']['internet']->id,
+                'plan_install_fee' => $cart['installation']['charge'],
+                'install_date1' => $cart['installation']['data']['install_date1'],
+                'install_date2' => $cart['installation']['data']['install_date2'],
+                'install_date3' => $cart['installation']['data']['install_date3'],
+                'install_time1' => $cart['installation']['data']['install_time1'],
+                'install_time2' => $cart['installation']['data']['install_time2'],
+                'install_time3' => $cart['installation']['data']['install_time3'],
+                'installation_addr' => $cart['installation']['data']['installation_address'],
+                'addons_data' => isset($cart['addon']) ? json_encode($cart['addon']) : '[]',
+                "total" => $cart['summary']['total'],
+                "discount" => $cart['summary']['discount'],
+                "tax" => $cart['summary']['tax'],
+                "shipping" => $cart['summary']['shipping'],
+                "grand_total" => $cart['summary']['grand_total'],
+                "order_number" => 'ORD' . time(),
+                "first_name" => $data['first_name'],
+                "last_name" => $data['last_name'],
+                "email" => $data['email'],
+                "homephone" => $data['homephone'],
+                "cellphone" => $data['cellphone'],
+                "prefered_method" => $data['prefered_method'],
+            ];
+
+            if(paymentGateway($data, $order_data)) {
+
+                $order = Order::create($order_data);
+
+                if($order){
+                    $order->plans()->attach($planIds);
+                    Session::forget(['checkavailability', 'cart', 'availableplan', 'stepqueue', 'activestep']);
+
+                    // Session::flush(); 
+                }
+
+                \DB::commit();
+
+                return redirect()->route('order.complete');
+            }    
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            dd($e);
         }
+
         return redirect()->back();
     }
 
