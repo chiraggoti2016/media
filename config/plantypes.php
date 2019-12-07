@@ -38,4 +38,15 @@ return [
 			 'Alerts and Notifications',
 		],
 	],
+
+	'ignore_field' => [
+		
+		'internet' => ['plan_belongstomany_channel_relationship'],
+
+		'tv' => ["tagline", "detail_desctiption", "upspeed","downspeed","upspeed_type","downspeed_type"],
+
+		'home_phone' => [],
+
+		'home_security' => [],
+	],
 ];
