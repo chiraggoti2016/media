@@ -55,7 +55,7 @@
 	                </div>
 	                @endif
 					<div class="col-sm-6 text-right">
-						@if($plan->id == $_plan->id)
+						@if(isset($plan) && $plan->id == $_plan->id)
 							<span class="plan-select select" data-plan-id="{{$_plan->id}}" data-next-url="{{route('cart.change.plan',[$_plan->type,$_plan->id])}}">Selected</span>
 						@else
 							<span class="plan-select" data-plan-id="{{$_plan->id}}" data-next-url="{{route('cart.change.plan',[$_plan->type,$_plan->id])}}">Select</span>

@@ -1,4 +1,3 @@
-@if(isset($plan))
         <!--==========================
         What's included in all our plans
       ============================-->
@@ -12,29 +11,33 @@
           <div class="row">
             <div class="col-lg-9">
               <h3>Tv Plans</h3>
-              <p>Your plan: <label class="label label-primary">{{ $plan->title }}</label></p>
+              @if(isset($plan))
+                <p>Your plan: <label class="label label-primary">{{ $plan->title }}</label></p>
+              @else
+                <p>Select plan</p>
+              @endif
             </div>
           </div>
 
-          @if(isset($cart['data']['tv'])) 
+
             <div class="row" id="alternate-container" >
-              @if (view()->exists('cart.alternate.' . strtolower(str_replace('_','-',$plan->type)))) 
-                @include('cart.alternate.' . strtolower(str_replace('_','-',$plan->type)), ['alternate_plans' => $alternate_plans, 'plan' => $plan])
+              @if (view()->exists('cart.alternate.' . strtolower(str_replace('_','-',$step)))) 
+                @include('cart.alternate.' . strtolower(str_replace('_','-',$step)), ['alternate_plans' => $alternate_plans, 'plan' => $plan])
               @endif
             </div>
 
-              @if (view()->exists('cart.addons.' . strtolower(str_replace('_','-',$plan->type)))) 
-                @include('cart.addons.' . strtolower(str_replace('_','-',$plan->type)), ['addons' => $addons, 'plan' => $plan])
-              @endif
+            @if (view()->exists('cart.addons.' . strtolower(str_replace('_','-',$step)))) 
+              @include('cart.addons.' . strtolower(str_replace('_','-',$step)), ['addons' => $addons, 'plan' => $plan])
+            @endif
 
-          @endif
+
         </div>
       </section>
 
   @push('js')
     <script src="/assets/plugins/jQuery-toast/dist/jquery.toast.min.js"></script>
     <script type="text/javascript">
-      var plan = "{{$plan->type}}";
+      var plan = "{{$step}}";
       var next_url = "{{route('cart.process')}}";
       $('.plan-select').click(function(e){
         $('.plan-select').each(function(){
@@ -55,4 +58,4 @@
     </script>
   @endpush
 
-@endif
+

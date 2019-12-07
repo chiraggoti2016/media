@@ -70,7 +70,7 @@ class CartController extends Controller
         if(count($stepqueue)>0) {
             $step = isset($stepqueue[$activestep]) ? $stepqueue[$activestep] : current($stepqueue);
             $addons = $alternate_plans = [];
-            
+
             if($step == 'internet') {
                 $availableplanId = Session::get('availableplan.'.$step);
 

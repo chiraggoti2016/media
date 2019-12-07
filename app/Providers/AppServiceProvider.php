@@ -70,7 +70,7 @@ class AppServiceProvider extends ServiceProvider
                 $next_url = ($process_done) ? (($step == 'payment')?route('cart.do.payment'):route('cart.process.done')) : '';
 
             }
-
+            
             doCartCalculation($cart);
 
             $view->with('cart', $cart)->with('process_done', $process_done)->with('next_url', $next_url)->with('step', $step);

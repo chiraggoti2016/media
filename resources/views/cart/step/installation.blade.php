@@ -94,7 +94,7 @@
                       </div>
                       <div class="col-sm-4">
                         <div class="input-group date" data-provide="datepicker">
-                            <input type="text" required="required" name="install_date{{$daynum}}" class="form-control" />
+                            <input type="text" {{($daynum==1)?'required="required"':''}} name="install_date{{$daynum}}" class="form-control" />
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-th"></span>
                             </div>
@@ -102,7 +102,7 @@
                       </div>
                       <div class="col-sm-4">
                         <div class="input-group">
-                          <select name="install_time{{$daynum}}"  required="required" class="form-control">
+                          <select name="install_time{{$daynum}}"  {{($daynum==1)?'required="required"':''}} class="form-control">
                             <option>- time slot -</option>
                             <option value="8am - 12pm">8am - 12pm</option>
                             <option value="12pm - 4pm">12pm - 4pm</option>
