@@ -41,12 +41,39 @@ return [
 
 	'ignore_field' => [
 		
-		'internet' => ['plan_belongstomany_channel_relationship'],
+		'internet' => [
+			'plan_belongstomany_channel_relationship', 
+			'type'
+		],
 
-		'tv' => ["tagline", "detail_desctiption", "upspeed","downspeed","upspeed_type","downspeed_type"],
+		'tv' => [
+			"tagline", 
+			"detail_desctiption", 
+			"upspeed",
+			"downspeed",
+			"upspeed_type",
+			"downspeed_type", 
+			'type'
+		],
 
-		'home_phone' => [],
+		'home_phone' => [
+			"tagline", 
+			"upspeed",
+			"downspeed",
+			"upspeed_type",
+			"downspeed_type", 
+			'type', 
+			'plan_belongstomany_channel_relationship'
+		],
 
-		'home_security' => [],
+		'home_security' => [
+			"tagline", 
+			"upspeed",
+			"downspeed",
+			"upspeed_type",
+			"downspeed_type", 
+			'type', 
+			'plan_belongstomany_channel_relationship'
+		],
 	],
 ];

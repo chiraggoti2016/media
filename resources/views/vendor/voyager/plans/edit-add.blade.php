@@ -55,12 +55,18 @@
                                 $dataTypeRows = $dataType->{($edit ? 'editRows' : 'addRows' )};
                             @endphp
                             
-                            @php $ignore_field = config('plantypes.ignore_field'); @endphp
+                            @php 
+                                $ignore_all_field = config('plantypes.ignore_field'); 
+                                $plantype = ($edit) ? $dataTypeContent->type : request('type'); 
+                                $ignore_field = isset($ignore_all_field[$plantype]) ? $ignore_all_field[$plantype] : [];
+                            @endphp
 
+                            <input type="hidden" name="type" value="{{$plantype}}" />
+                            
                             @foreach($dataTypeRows as $row)
 
                                 <!-- Check Ignore Field -->
-                                @if( isset($ignore_field[$dataTypeContent->type]) && in_array($row->field,$ignore_field[$dataTypeContent->type]) )
+                                @if(in_array($row->field, $ignore_field))
                                     @continue
                                 @endif
 
