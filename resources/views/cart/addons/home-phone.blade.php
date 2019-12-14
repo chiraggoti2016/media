@@ -5,10 +5,10 @@
 
  <div class="row">
   <div class="col-lg-9">
-    <h3>Internet Modem</h3>
+    <h3>Phone Adapter</h3>
 
     @if(count($_modemdata))
-  		<p>Your modem:
+  		<p>Your adapter:
   			@foreach($_modemdata as $_mdata)
 	  			<label class="label label-primary">{{ $_mdata['addon']->name }}</label> 	
   			@endforeach
