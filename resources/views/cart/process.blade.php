@@ -5,7 +5,7 @@
 @push('css')
     <link rel="stylesheet" href="/assets/plugins/jQuery-toast/dist/jquery.toast.min.css">
     <style type="text/css">
-      .progressbar li { width: {{ number_format(100 / count($stepqueue)) }}%; }
+      .progressbar li { width: {{ number_format(floor(100 / count($stepqueue))) }}%; }
     </style>
 @endpush
 
