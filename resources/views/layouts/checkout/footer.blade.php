@@ -73,6 +73,10 @@
               <div class="row">
                 <div class="col-sm-6">
                   @foreach($cart['data'] as $plantype => $plan) 
+                  
+                    @if(!in_array($plantype, config('plantypes.list'))) 
+                      @continue
+                    @endif
                     <h4>{{ucwords( str_replace('_',' ', $plantype) )}}</h4>
                     <table>
                       <tr>

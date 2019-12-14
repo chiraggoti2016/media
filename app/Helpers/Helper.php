@@ -58,6 +58,8 @@ if (!function_exists('doCartCalculation')) {
 			$cart['current_per'] = 100;
 			$cart['planamounts'] = 0;
 		    foreach($cart['data'] as $plantype => $plan) {
+		    	if(!in_array($plantype, config('plantypes.list'))) 
+		    		continue; 
 		    	$cart['data'][$plantype] = $cart['data'][$plantype] ?? new \App\Plan;
 		        $total += getPrice($plan);
 		        $cart['planamounts'] += getPrice($plan);
