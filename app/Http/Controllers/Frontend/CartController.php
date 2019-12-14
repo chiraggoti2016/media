@@ -77,9 +77,12 @@ class CartController extends Controller
 
             $alternate_plans = Plan::where('type', $step)->get();
 
-            if(in_array($step, ['internet', 'home_phone'])) {
+            if(in_array($step, ['internet'])) {
                 $addons['modem'] = Addon::where('type', $step)->where('device_type', 'modem')->get();
                 $addons['other'] = Addon::where('type', $step)->where('device_type', '!=','modem')->get();
+            } elseif(in_array($step, ['home_phone'])) {
+                $addons['modem'] = Addon::where('type', $step)->where('device_type', 'adapter')->get();
+                $addons['other'] = Addon::where('type', $step)->where('device_type', '!=','adapter')->get();
             }
 
             Session::put('cart.data.' . $step, $plan);                
