@@ -34,7 +34,7 @@
     </ul>
   </section>
 
-  @include('cart.step.' . $step)
+  @include('cart.step.' . str_replace('_','-',$step))
 </main>
 @stop
 

@@ -52,7 +52,7 @@ if (!function_exists('getDiscount')) {
 }
 if (!function_exists('doCartCalculation')) {
 	function doCartCalculation(&$cart){
-	
+
 		$total = $discount = $one_time = 0;
 		if(isset($cart['data'])) {
 			$cart['current_per'] = 100;
