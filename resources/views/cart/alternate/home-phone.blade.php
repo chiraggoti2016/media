@@ -14,10 +14,9 @@
                 @if(isset($options[$_plan->type]))
 	                <hr>
 					<ul class="fa-ul">
-	                  	<li style="font-size: 12px;"><span class="fa-li"><i class="fa fa-check"></i></span>Up to {{$_plan->downspeed}} {{ucwords($_plan->downspeed_type)}} download</li>
-						<li style="font-size: 12px;"><span class="fa-li"><i class="fa fa-check"></i></span>Up to {{$_plan->upspeed}} {{ucwords($_plan->upspeed_type)}} upload</li>
-						<li style="font-size: 12px;"><span class="fa-li"><i class="fa fa-check"></i></span>No usage limits</li>
-						<li style="font-size: 12px;"><span class="fa-li"><i class="fa fa-check"></i></span>No fixed-term contracts</li>
+						<li style="font-size: 12px;"><span class="fa-li"><i class="fa fa-check"></i></span>Unlimited calling within Canada and USA</li>
+						<li style="font-size: 12px;"><span class="fa-li"><i class="fa fa-check"></i></span>15 features included</li>
+						<li style="font-size: 12px;"><span class="fa-li"><i class="fa fa-check"></i></span>Low long distance rates outside Canada and USA</li>
 	                </ul>
                 @endif
                 <hr>
