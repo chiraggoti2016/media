@@ -81,8 +81,8 @@ class CartController extends Controller
                 $addons['modem'] = Addon::where('type', $step)->where('device_type', 'modem')->get();
                 $addons['other'] = Addon::where('type', $step)->where('device_type', '!=','modem')->get();
             } elseif(in_array($step, ['home_phone'])) {
-                $addons['modem'] = Addon::where('type', $step)->where('device_type', 'adapter')->get();
-                $addons['other'] = Addon::where('type', $step)->where('device_type', '!=','adapter')->get();
+                $addons['modem'] = Addon::where('type', $step)->where('device_type', 'modem')->get();
+                $addons['other'] = Addon::where('type', $step)->where('device_type', '!=','modem')->get();
             }
 
             Session::put('cart.data.' . $step, $plan);                
