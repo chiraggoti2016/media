@@ -14,7 +14,7 @@
   			@endforeach
   		</p> 
     @else
-	    <p>Please select modem options</p>
+	    <p>Please select adapter options</p>
 	@endif
   </div>
   <div class="col-lg-3 text-center change-link-container">
