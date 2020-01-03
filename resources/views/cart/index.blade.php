@@ -174,7 +174,8 @@
         source: function(term, response){
             try { xhr.abort(); } catch(e){}
             xhr = $.getJSON('{{route("cart.sugguest.address")}}', { q: term }, function(data){ response(data); });
-        }
+        },
+        minLength: 1,
     });
     
 
