@@ -114,7 +114,9 @@ class CartController extends Controller
 
             $planIds = [];
             foreach($cart['data'] as $eachplan) {
-                $planIds[] = $eachplan->id;
+                if(isset($eachplan->id)) {
+                    $planIds[] = $eachplan->id;
+                }
             }
 
             doCartCalculation($cart);
