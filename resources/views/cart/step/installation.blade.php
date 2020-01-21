@@ -93,8 +93,8 @@
                         <label class="label">Install Date #{{$daynum}}</label>
                       </div>
                       <div class="col-sm-4">
-                        <div class="input-group date" data-provide="datepicker">
-                            <input type="text" {{($daynum==1)?'required="required"':''}} name="install_date{{$daynum}}" class="form-control" />
+                        <div class="input-group date">
+                            <input type="text" {{($daynum==1)?'required="required"':''}} name="install_date{{$daynum}}" class="form-control datepicker1" />
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-th"></span>
                             </div>
@@ -195,6 +195,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
   <script type="text/javascript">
-
+    // datepicker1
+    $('.datepicker1').datepicker({
+     format: "yy-mm-dd",
+     startDate: '+1d',
+     // endDate: '+10d'
+    }); 
   </script>
 @endpush
