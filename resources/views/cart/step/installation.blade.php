@@ -197,9 +197,7 @@
   <script type="text/javascript">
     // datepicker1
     $('.datepicker1').datepicker({
-     format: "yy-mm-dd",
      startDate: '+1d',
-     // endDate: '+10d'
     }); 
   </script>
 @endpush
