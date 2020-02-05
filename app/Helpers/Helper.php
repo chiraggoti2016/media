@@ -76,7 +76,8 @@ if (!function_exists('doCartCalculation')) {
 		                } else {
 
 		                	$current_rent = $modem['addon']->rent_amount;
-		                    $one_time += ($modem['addon']->deposit + $current_rent);
+		                	$cart['planamounts'] += $current_rent;
+		                    $one_time += ($modem['addon']->deposit);
 		                    $addon_total +=($current_rent + $modem['addon']->deposit);
 		                }
 		           }
