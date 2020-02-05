@@ -163,7 +163,7 @@ class CartController extends Controller
 
                 \DB::commit();
 
-                return redirect()->route('order.complete');
+                return redirect()->route('order.complete', $order->id);
             }    
         } catch (\Exception $e) {
             \DB::rollBack();

@@ -53,7 +53,7 @@ Route::group(['namespace' => 'Frontend'], function(){
     	});
         
         Route::group(['prefix' => 'order'], function(){
-            Route::any('/complete', 'OrderController@complete')->name('order.complete');
+            Route::any('/complete/{id}', 'OrderController@complete')->name('order.complete');
         });
         
 		Route::get('/{type}', 'HomeController@plan')->name('plan');

@@ -27,8 +27,8 @@
                   <span class="seprator"></span>
                 
                   <p class="col">
-                    Prorated first payment:
-                    <b>${{$cart['summary']['grand_total']}}</b> <br/>
+                    {{-- Prorated first payment:
+                    <b>${{$cart['summary']['grand_total']}}</b> <br/> --}}
                     One time charge:
                     <b>${{$cart['summary']['one_time']}}</b>
 

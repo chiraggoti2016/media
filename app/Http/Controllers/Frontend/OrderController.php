@@ -17,10 +17,11 @@ class OrderController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    public function complete()
+    public function complete($id)
     {
+        $order = Order::with('plans')->join('transactions', 'transactions.order_number', '=', 'orders.order_number')->where('orders.id', $id)->first();
 
-        return view('order.complete');
+        return view('order.complete', compact('order'));
     }
 
 }

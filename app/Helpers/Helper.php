@@ -83,7 +83,7 @@ if (!function_exists('doCartCalculation')) {
 		        }
 		        if(isset($cart['addon'][$plantype]['other'])) {
 		           foreach($cart['addon'][$plantype]['other'] as $other_id => $other) {
-		                // $one_time += $other['addon']->amount;
+		                $one_time += $other['addon']->amount;
 						$addon_total +=$other['addon']->amount;
 		           } 
 		        }
@@ -97,6 +97,7 @@ if (!function_exists('doCartCalculation')) {
 		    $total += $cart['installation']['charge'];
 	    }
 	    $shipping = setting('site.shipping-charge') ?? 0;
+	    $one_time += $shipping;
 	    $total += $shipping;
 	    $tax = ($total * (setting('site.tax') ?? 0) / 100);
 	    $grand_total = $total + $tax;
