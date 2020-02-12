@@ -1,0 +1,114 @@
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 100;
+  src: local('Lato Hairline Italic'), local('Lato-HairlineItalic'), url(http://fonts.gstatic.com/s/lato/v16/S6u-w4BMUTPHjxsIPx-oPCc.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 300;
+  src: local('Lato Light Italic'), local('Lato-LightItalic'), url(http://fonts.gstatic.com/s/lato/v16/S6u_w4BMUTPHjxsI9w2_Gwfo.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Lato Italic'), local('Lato-Italic'), url(http://fonts.gstatic.com/s/lato/v16/S6u8w4BMUTPHjxsAXC-v.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(http://fonts.gstatic.com/s/lato/v16/S6u_w4BMUTPHjxsI5wq_Gwfo.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 900;
+  src: local('Lato Black Italic'), local('Lato-BlackItalic'), url(http://fonts.gstatic.com/s/lato/v16/S6u_w4BMUTPHjxsI3wi_Gwfo.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 100;
+  src: local('Lato Hairline'), local('Lato-Hairline'), url(http://fonts.gstatic.com/s/lato/v16/S6u8w4BMUTPHh30AXC-v.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Lato Light'), local('Lato-Light'), url(http://fonts.gstatic.com/s/lato/v16/S6u9w4BMUTPHh7USSwiPHA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lato Regular'), local('Lato-Regular'), url(http://fonts.gstatic.com/s/lato/v16/S6uyw4BMUTPHjx4wWw.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Lato Bold'), local('Lato-Bold'), url(http://fonts.gstatic.com/s/lato/v16/S6u9w4BMUTPHh6UVSwiPHA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Lato Black'), local('Lato-Black'), url(http://fonts.gstatic.com/s/lato/v16/S6u9w4BMUTPHh50XSwiPHA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 100;
+  src: local('Work Sans Thin'), local('WorkSans-Thin'), url(http://fonts.gstatic.com/s/worksans/v5/QGYqz_wNahGAdqQ43Rh3H5Drv_g.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 200;
+  src: local('Work Sans ExtraLight'), local('WorkSans-ExtraLight'), url(http://fonts.gstatic.com/s/worksans/v5/QGYpz_wNahGAdqQ43Rh3s4H8mNhI.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Work Sans Light'), local('WorkSans-Light'), url(http://fonts.gstatic.com/s/worksans/v5/QGYpz_wNahGAdqQ43Rh314L8mNhI.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Work Sans'), local('WorkSans-Regular'), url(http://fonts.gstatic.com/s/worksans/v5/QGYsz_wNahGAdqQ43Rh_fKDs.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Work Sans Medium'), local('WorkSans-Medium'), url(http://fonts.gstatic.com/s/worksans/v5/QGYpz_wNahGAdqQ43Rh3j4P8mNhI.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Work Sans SemiBold'), local('WorkSans-SemiBold'), url(http://fonts.gstatic.com/s/worksans/v5/QGYpz_wNahGAdqQ43Rh3o4T8mNhI.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Work Sans Bold'), local('WorkSans-Bold'), url(http://fonts.gstatic.com/s/worksans/v5/QGYpz_wNahGAdqQ43Rh3x4X8mNhI.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 800;
+  src: local('Work Sans ExtraBold'), local('WorkSans-ExtraBold'), url(http://fonts.gstatic.com/s/worksans/v5/QGYpz_wNahGAdqQ43Rh324b8mNhI.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Work Sans Black'), local('WorkSans-Black'), url(http://fonts.gstatic.com/s/worksans/v5/QGYpz_wNahGAdqQ43Rh3_4f8mNhI.ttf) format('truetype');
+}
