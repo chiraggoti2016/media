@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr-FR">
-    <!-- Mirrored from allotelecom.ca/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 07 Feb 2020 08:29:22 GMT -->
-    <!-- Added by HTTrack -->
+
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-    <!-- /Added by HTTrack -->
+
     <head>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,8 +31,10 @@
         <link rel='stylesheet' id='photoswipe-css'  href='/theme/assets/wp-content/plugins/keydesign-addon/assets/css/photoswipeaead.css?ver=5.0.3' type='text/css' media='all' />
         <link rel='stylesheet' id='photoswipe-skin-css'  href='/theme/assets/wp-content/plugins/keydesign-addon/assets/css/photoswipe-default-skinaead.css?ver=5.0.3' type='text/css' media='all' />
         <link rel='stylesheet' id='redux-google-fonts-css'  href='/theme/assets/../fonts.googleapis.com/css0c16.css?family=Lato%3A100%2C300%2C400%2C700%2C900%2C100italic%2C300italic%2C400italic%2C700italic%2C900italic%7CWork+Sans%3A100%2C200%2C300%2C400%2C500%2C600%2C700%2C800%2C900&amp;ver=1559053916' type='text/css' media='all' />
-        <script type='text/javascript' src='/theme/assets/wp-includes/js/jquery/jqueryb8ff.js?ver=1.12.4'></script>
-        <script type='text/javascript' src='/theme/assets/wp-includes/js/jquery/jquery-migrate.min330a.js?ver=1.4.1'></script>
+        
+        <script src="/assets/lib/jquery/jquery.min.js"></script>
+        <script src="/assets/lib/jquery/jquery-migrate.min.js"></script>
+        
         <script type='text/javascript' src='/theme/assets/wp-content/plugins/keydesign-addon/assets/js/jquery.easing.minaead.js?ver=5.0.3'></script>
         <script type='text/javascript' src='/theme/assets/wp-content/plugins/keydesign-addon/assets/js/owl.carousel.minaead.js?ver=5.0.3'></script>
         <script type='text/javascript' src='/theme/assets/wp-content/plugins/keydesign-addon/assets/js/jquery.easytabs.minaead.js?ver=5.0.3'></script>
@@ -156,9 +157,7 @@
         <script type='text/javascript' src='/theme/assets/wp-content/plugins/keydesign-addon/assets/js/kd_counttoaead.js?ver=5.0.3'></script>
         <script type='text/javascript' src='/theme/assets/wp-content/plugins/js_composer/assets/lib/waypoints/waypoints.min24b2.js?ver=5.5.5'></script>
 
-          <!-- <script src="/assets/lib/jquery/jquery.min.js"></script> -->
-          <!-- <script src="/assets/lib/jquery/jquery-migrate.min.js"></script> -->
-          <!-- <script src="/assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+          <script src="/assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
           <script src="/assets/lib/easing/easing.min.js"></script>
           <script src="/assets/lib/superfish/hoverIntent.js"></script>
           <script src="/assets/lib/superfish/superfish.min.js"></script>
