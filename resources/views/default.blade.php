@@ -100,6 +100,10 @@
                   padding: 15px 0;
                   position: relative;
               }
+
+              .modal {
+                z-index: 10500;
+              }
         </style>
 
         @stack('css')
@@ -157,13 +161,13 @@
         <script type='text/javascript' src='/theme/assets/wp-content/plugins/keydesign-addon/assets/js/kd_counttoaead.js?ver=5.0.3'></script>
         <script type='text/javascript' src='/theme/assets/wp-content/plugins/js_composer/assets/lib/waypoints/waypoints.min24b2.js?ver=5.5.5'></script>
 
-          <script src="/assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+          <!-- <script src="/assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script> -->
           <script src="/assets/lib/easing/easing.min.js"></script>
-          <script src="/assets/lib/superfish/hoverIntent.js"></script>
-          <script src="/assets/lib/superfish/superfish.min.js"></script>
+          <!-- <script src="/assets/lib/superfish/hoverIntent.js"></script> -->
+          <!-- <script src="/assets/lib/superfish/superfish.min.js"></script> -->
           <script src="/assets/lib/wow/wow.min.js"></script>
           <script src="/assets/lib/venobox/venobox.min.js"></script>
-          <script src="/assets/lib/owlcarousel/owl.carousel.min.js"></script>
+          <!-- <script src="/assets/lib/owlcarousel/owl.carousel.min.js"></script> -->
 
           <!-- Contact Form JavaScript File -->
           <!-- <script src="/assets/contactform/contactform.js"></script> -->
