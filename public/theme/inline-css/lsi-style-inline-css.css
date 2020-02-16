@@ -1,0 +1,13 @@
+.icon-set-lsi_widget-2 a,
+.icon-set-lsi_widget-2 a:visited,
+.icon-set-lsi_widget-2 a:focus {
+    border-radius: 5px;
+    background: #1E72BD !important;
+    color: #FFFFFF !important;
+    font-size: 20px !important;
+}
+
+.icon-set-lsi_widget-2 a:hover {
+    background: #dd3333 !important;
+    color: #FFFFFF !important;
+}

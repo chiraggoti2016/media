@@ -1,146 +1,106 @@
-@extends('layouts.master')
+@extends('layouts.default')
 
 @section('title','Plans')
 
 @section('poster')
-<!--==========================
-    Intro Section
-  ============================-->
-  <section id="intro" class="internet-cover">
-    <div class="intro-container wow fadeIn">
-      <h1 class="mb-2 pb-0">Early Black Friday <br><span>Internet Deals</span></h1>
-    </div>
-  </section>
+  @include('home.slider')
 @stop
 
+@push('css')
+<style type="text/css">
+  .plans-tab-single__features label span{
+    display: inline;
+  }
+</style>
+@endpush
+
 @section('content')
-<main id="main">
-
-  <!--==========================
-      About Section
-    ============================-->
-    <section id="about">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6">
-            <h2>CALL +1-855-333-8269</h2>
-            <p>TO SIGN UP OR ORDER ONLINE</p>
+<section id="plans" class="internet-plans">
+  <div class="container">
+      <div class="row" style="display: none;">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+              <div class="section-title">
+                  <h1>Internet Packages</h1>
+              </div>
+              <!-- section-title -->
           </div>
-        </div>
       </div>
-    </section>
-
-
-  <!--==========================
-      Shop Online Section
-    ============================-->
-    <section id="buy-tickets" class="section-with-bg wow fadeInUp">
-      <div class="container">
-
-        <div class="section-header">
-          <h2>Most Popular Plans</h2>
-          <!-- <p>Velit consequatur consequatur inventore iste fugit unde omnis eum aut.</p> -->
-        </div>
-
-        <div class="row">
-          @foreach($plans as $plan)
-            @php $price = splitAmount(getPrice($plan)); @endphp
-          <div class="col-lg-4">
-            <div class="card mb-5 mb-lg-0">
-              <div class="card-body">
-
-                <h5 class="card-title text-muted text-uppercase text-center">{{$plan->title}}</h5>
-                <h6 class="card-price text-center">
-                  <div class="featured-new__price-helper">
-                        <div class="price price--format_english">
-                          <div class="price__from">{{ str_replace('-','',$plan->tagline)}}</div>
-                          $<span class="price__value--dollars">{{ $price['whole'] }}</span>
-                          <span class="price__group">
-                            <span class="price__value--cents">.{{ $price['decimal'] }}</span>
-                            <div class="price__period">monthly</div>
-                          </span>
-                        </div>
-                  </div>
-                </h6>
-                  
-                @if(strtolower($plan->type) == 'tv')
-                  <hr/>
+      <div class="row" style="margin-top: 50px;">
+          <div class="col-sm-12 col-md-12 col-lg-12" style="margin-top: 30px;">
+            <div class="internet-plans__tabs">
+              <ul id="cable_1" class="nav nav-tabs plans__tab" role="tablist">
+                  <li role="presentation" class="active"><a href="#plans-tab-one" aria-controls="plans-tab-one" role="tab" data-toggle="tab"><span class="icon-tab icon-ethernet"></span> Most <span>Popular Plans</span></a></li>
+              </ul>
+              <!-- TAB -->
+              <!-- TAB Content -->
+              <div class="tab-content plans-content" style="margin-bottom: 60px;">
+                <div role="tabpanel" class="tab-pane active" id="plans-tab-one">
                   <div class="row">
-                      @foreach($plan->channels->take(5) as $channel)
-                        <span class="ml-2 mr-2">
-                          @php echo $channel->logo_tag; @endphp
-                        </span>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                      @foreach($plans as $p_index => $plan)
+                        @php $price = splitAmount(getPrice($plan)); @endphp    
+
+                        <div class="plans-tab-single plan" id="{{($p_index+1)}}">
+                            <div class="plans-tab-single__title">
+                                <h6>{{$plan->title}}</h6>
+                                <!-- <small>{{ str_replace('-','',$plan->tagline)}}</small> -->
+                            </div>
+                            <div class="plans-tab-single__body">
+                              @if(strtolower($plan->type) == 'internet')
+                              <div class="plans-tab-single__info">
+                                  <ul class="nav">
+                                      <li><span class="icon-speedometer"></span>
+                                          <p>{{$plan->downspeed}} {{ucwords($plan->downspeed_type)}}</p>
+                                      </li>
+                                      <li><span class="icon-upload"></span>
+                                          <p>{{$plan->upspeed}} {{ucwords($plan->upspeed_type)}}</p>
+                                      </li>
+                                </ul>
+                              </div>
+                              @elseif(strtolower($plan->type) == 'tv')
+                              <!-- single__info -->
+                              <div class="plans-tab-single__features plan_features" data-default="0">
+                                <label class="checkbox-styled" data-default="0">
+                                   <!-- <input type="radio" name="5770_1" value="Capacité Transfert ILLIMITÉ " data-price="26.99" checked="">
+                                    <div class="features__wrapper">
+                                        <i class="features__icon unlimited__icon icon-bandwidth"></i>
+                                        <span class="features__text">Xyz</span>
+                                    </div> -->
+                                    @foreach($plan->channels->take(5) as $channel)
+                                      <span class="ml-2 mr-2">
+                                        @php echo $channel->logo_tag; @endphp
+                                      </span>
+                                    @endforeach
+                                </label>
+                              </div>
+                              @endif
+                              <!-- Plan features -->
+                              <div class="plans-tab-single__total plan__total">
+                                
+                                <form action="{{route('cart.index')}}" method="POST">
+                                    @csrf
+                                    <label>
+                                      <sup>$</sup><span id="plan_total_1">{{getPrice($plan)}}</span><sub>monthly</sub>
+                                    </label>
+                                    <input type="hidden" name="plan_id" value="{{$plan->id}}" />
+                                    <input type="hidden" name="plan_type" value="{{$plan->type}}" />
+                                    <input type="submit" name="plan_1" value="Détails">
+
+                                  </form>
+                              </div>
+                            </div>
+                        </div>
                       @endforeach
-                  </div>
-                @endif
-                @if(!empty($plan->downspeed) && !empty($plan->upspeed))
-                    <hr>
-                    @if(strtolower($plan->type) == 'internet')
-                    <div class="row">
-                      <div class="col-sm-6">
-                        <h6 class="text-muted text-uppercase text-center"><i class="fa fa-chevron-down"></i></span> {{$plan->downspeed}} {{ucwords($plan->downspeed_type)}}</h6>                  
-                      </div>
-                      <div class="col-sm-6">
-                        <h6 class="text-muted text-uppercase text-center"><i class="fa fa-chevron-up"></i></span> {{$plan->upspeed}} {{ucwords($plan->upspeed_type)}}</h6>
-                      </div>
+
                     </div>
-                    @endif
-                @endif
-                <hr>
-                <div class="text-center">
-                  <form action="{{route('cart.index')}}" method="POST">
-                    @csrf
-                    <input type="hidden" name="plan_id" value="{{$plan->id}}" />
-                    <input type="hidden" name="plan_type" value="{{$plan->type}}" />
-                    <button type="submit" class="btn">Order</button>
-                  </form>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          @endforeach
-        </div>
-
       </div>
-
-      <!-- Modal Order Form -->
-      <div id="buy-ticket-modal" class="modal fade">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Buy Tickets</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form method="POST" action="#">
-                <div class="form-group">
-                  <input type="text" class="form-control" name="your-name" placeholder="Your Name">
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" name="your-email" placeholder="Your Email">
-                </div>
-                <div class="form-group">
-                  <select id="ticket-type" name="ticket-type" class="form-control" >
-                    <option value="">-- Select Your Ticket Type --</option>
-                    <option value="standard-access">Standard Access</option>
-                    <option value="pro-access">Pro Access</option>
-                    <option value="premium-access">Premium Access</option>
-                  </select>
-                </div>
-                <div class="text-center">
-                  <button type="submit" class="btn">Buy Now</button>
-                </div>
-              </form>
-            </div>
-          </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-      </div><!-- /.modal -->
-
-    </section>
-   
-</main>
+  </div>
+</section>
 @stop
 
 @push('js')
