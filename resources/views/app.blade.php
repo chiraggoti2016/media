@@ -9,8 +9,9 @@
   <meta content="" name="description">
 
   <!-- Favicons -->
-  <link href="/assets/img/favicon.png" rel="icon">
-  <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="/theme/assets/wp-content/uploads/2019/03/cropped-Allo-Tellecom-8-1.png" rel="icon"/>
+  <!-- <link href="/assets/img/favicon.png" rel="icon"> -->
+  <!-- <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">

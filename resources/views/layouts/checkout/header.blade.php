@@ -6,8 +6,7 @@
 
       <div id="logo" class="pull-left">
         <!-- Uncomment below if you prefer to use a text logo -->
-         <h1><a href="#main">Med<span>I</span>a</a></h1>
-        <!-- <a href="#intro" class="scrollto"><img src="/assets/img/logo.png" alt="" title=""></a> -->
+         <img class="fixed-logo" src="/theme/assets/wp-content/uploads/2019/02/white-lgoo.png" width=""  alt="Allo Telecom" />
       </div>
 
       <nav id="nav-menu-container">
