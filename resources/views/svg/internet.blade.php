@@ -1,6 +1,6 @@
 <svg class="checkout-start-services__item-icon" width="100px" height="100px" viewBox="0 0 367 255" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <g id="internet_icon_blue" fill="#f82249">
+                                    <g id="internet_icon_blue" fill="#c80000">
                                         <g id="Layer_1">
                                             <g id="Group">
                                                 <rect id="Rectangle-path" x="60.4" y="152.7" width="247.2" height="14.1"></rect>

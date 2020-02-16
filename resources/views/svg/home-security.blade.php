@@ -1,6 +1,6 @@
 <svg class="checkout-start-services__item-icon" width="100px" height="100px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                 <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <g id="phone_icon_blue" fill="#f82249">
+                                    <g id="phone_icon_blue" fill="#c80000">
                                         <g id="Layer_1">
                                             <g id="Group">
                                                 <path class="st0" d="M251,173.8l-100,59.7l10.1,16.8l23.3-13.9v83.7c0,10.7,8.7,19.3,19.3,19.3h104.8c10.7,0,19.3-8.7,19.3-19.3v-83.7l23.3,13.9l10.1-16.8l-100-59.7C257.9,172,254.1,172,251,173.8z M308.3,224.9h-0.2l0.3,95l-104.5,0.3v-95.3h-0.2l52.3-31.3L308.3,224.9z"></path>
